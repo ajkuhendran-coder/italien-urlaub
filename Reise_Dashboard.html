@@ -7,6 +7,9 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#0E6FB8">
 <title>Italien-Urlaub · 25.–31. Mai 2026</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
 <style>
   :root{
@@ -156,6 +159,77 @@
 
   /* Tap highlights for iOS */
   details summary:active{background:#f8fafc}
+
+  /* ---------- COUNTDOWN ---------- */
+  .countdown{background:linear-gradient(135deg,#0E6FB8 0%,#D72638 100%);
+    color:#fff;border-radius:18px;padding:14px 16px;text-align:center;
+    box-shadow:0 6px 18px rgba(14,111,184,.25)}
+  .cd-title{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;
+    font-weight:700;opacity:.92;margin-bottom:8px}
+  .cd-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .cd-grid > div{background:rgba(255,255,255,.18);backdrop-filter:blur(8px);
+    border-radius:12px;padding:10px 4px}
+  .cd-grid span{display:block;font-size:1.65rem;font-weight:800;line-height:1}
+  .cd-grid small{display:block;font-size:.68rem;text-transform:uppercase;
+    letter-spacing:.06em;margin-top:4px;opacity:.85}
+  .countdown.over{background:linear-gradient(135deg,#2A9D8F,#F4A261)}
+
+  /* ---------- WEATHER ---------- */
+  .weather{display:grid;gap:12px;grid-template-columns:1fr;}
+  @media(min-width:620px){.weather{grid-template-columns:1fr 1fr}}
+  .wx-city{background:#fff;border-radius:16px;padding:14px;border:1px solid var(--border);
+    box-shadow:0 3px 10px rgba(0,0,0,.04)}
+  .wx-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+  .wx-head h3{margin:0;font-size:1rem}
+  .wx-head .status{font-size:.72rem;color:var(--muted)}
+  .wx-days{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+  .wx-d{text-align:center;padding:6px 2px;border-radius:8px;background:var(--sea)}
+  .wx-d .dow{font-size:.62rem;color:var(--muted);text-transform:uppercase;
+    letter-spacing:.04em;font-weight:600}
+  .wx-d .ic{font-size:1.15rem;margin:2px 0}
+  .wx-d .tmax{font-size:.78rem;font-weight:700;color:var(--ink)}
+  .wx-d .tmin{font-size:.65rem;color:var(--muted)}
+  .wx-loading{font-size:.85rem;color:var(--muted);text-align:center;padding:12px}
+
+  /* ---------- PACKING LIST ---------- */
+  .pack{background:#fff;border-radius:16px;border:1px solid var(--border);
+    box-shadow:0 3px 10px rgba(0,0,0,.04);padding:14px 16px}
+  .pack-group{margin-bottom:12px}
+  .pack-group:last-child{margin-bottom:0}
+  .pack-group h4{font-size:.82rem;font-weight:700;color:var(--primary);
+    text-transform:uppercase;letter-spacing:.08em;margin:0 0 8px;
+    display:flex;align-items:center;gap:6px}
+  .pack-item{display:flex;align-items:center;gap:10px;padding:7px 4px;
+    border-bottom:1px dashed #f0f2f5;cursor:pointer;user-select:none;
+    -webkit-tap-highlight-color:transparent}
+  .pack-item:last-child{border-bottom:0}
+  .pack-item input{width:20px;height:20px;accent-color:var(--primary);
+    flex-shrink:0;cursor:pointer}
+  .pack-item span{font-size:.95rem;line-height:1.3}
+  .pack-item.done span{text-decoration:line-through;color:var(--muted)}
+  .pack-progress{font-size:.78rem;color:var(--muted);margin-top:8px;display:flex;
+    align-items:center;gap:8px}
+  .pack-progress .pbar{flex:1;height:6px;background:#eef1f6;border-radius:999px;overflow:hidden}
+  .pack-progress .pbar span{display:block;height:100%;
+    background:linear-gradient(90deg,var(--primary),var(--green));transition:width .3s}
+
+  /* ---------- ACTION BUTTONS ---------- */
+  .actions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
+  @media(min-width:520px){.actions{grid-template-columns:1fr 1fr}}
+  .btn{display:flex;align-items:center;justify-content:center;gap:8px;
+    background:var(--primary);color:#fff;text-decoration:none;
+    padding:12px 16px;border-radius:12px;font-weight:700;font-size:.95rem;
+    border:none;cursor:pointer;transition:transform .1s,box-shadow .15s;
+    box-shadow:0 3px 10px rgba(14,111,184,.2)}
+  .btn:active{transform:scale(.98)}
+  .btn:hover{box-shadow:0 5px 14px rgba(14,111,184,.3)}
+  .btn.secondary{background:#fff;color:var(--primary);border:1.5px solid var(--primary)}
+
+  /* ---------- INSTALL HINT (PWA) ---------- */
+  .install-hint{background:var(--sand);border:1px solid #F3E8C9;border-radius:12px;
+    padding:10px 14px;font-size:.85rem;line-height:1.4;color:var(--ink);
+    display:flex;gap:10px;align-items:flex-start;margin-top:12px}
+  .install-hint b{color:var(--primary)}
 </style>
 </head>
 <body>
@@ -178,6 +252,28 @@
   <div class="stat"><div class="v">2</div><div class="l">Städte</div></div>
   <div class="stat"><div class="v">~1.9k€</div><div class="l">Budget</div></div>
 </div>
+
+<!-- COUNTDOWN -->
+<section>
+  <div class="countdown" id="countdown">
+    <div class="cd-title">Noch bis Abflug</div>
+    <div class="cd-grid">
+      <div><span id="cd-d">–</span><small>Tage</small></div>
+      <div><span id="cd-h">–</span><small>Stunden</small></div>
+      <div><span id="cd-m">–</span><small>Minuten</small></div>
+      <div><span id="cd-s">–</span><small>Sek.</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- WEATHER -->
+<section>
+  <h2><span class="ico">☀️</span> Wetter vor Ort</h2>
+  <div class="weather" id="weather">
+    <div class="wx-city" data-city="Rom"        data-lat="41.9028" data-lon="12.4964"></div>
+    <div class="wx-city" data-city="Neapel"     data-lat="40.8518" data-lon="14.2681"></div>
+  </div>
+</section>
 
 <!-- MAP -->
 <section>
@@ -239,19 +335,19 @@
       <div class="content">
         <div class="block"><div class="time">09:00</div><div class="txt">
           <b>Kolosseum + Forum + Palatin</b>
-          <div class="d">Kombiticket 18 € · Kinderführung auf Deutsch empfohlen (GetYourGuide ~25 €)</div></div></div>
+          <div class="d">Kombiticket 18 € · Kinderführung auf Deutsch empfohlen (GetYourGuide ~25 €) · Zeitslot online buchen!</div></div></div>
         <div class="block"><div class="time">12:30</div><div class="txt">
           <b>Pizza al Taglio Mittagessen</b>
           <div class="d">Nach Gewicht – Kinder lieben es!</div></div></div>
         <div class="block"><div class="time">14:00</div><div class="txt">
           <b>🌿 Siesta im Hotel</b>
           <div class="d">Die Pause ist Pflicht – sie rettet den Tag</div></div></div>
-        <div class="block"><div class="time">17:00</div><div class="txt">
-          <b>Trevi-Brunnen</b>
-          <div class="d">Münze werfen · Eis bei Giolitti</div></div></div>
-        <div class="block"><div class="time">19:30</div><div class="txt">
+        <div class="block"><div class="time">16:30</div><div class="txt">
+          <b>Spaziergang Trastevere</b>
+          <div class="d">Urige Gassen, Flohmarkt-Flair, Straßenmusiker. Am Tiberufer entlangschlendern.</div></div></div>
+        <div class="block"><div class="time">19:00</div><div class="txt">
           <b>Dinner in Trastevere</b>
-          <div class="d">Urig, kinderfreundlich, Livemusik in den Gassen</div></div></div>
+          <div class="d">Kinderfreundliche Trattoria. Früh essen = keine Wartezeit.</div></div></div>
       </div>
     </details>
 
@@ -260,27 +356,39 @@
         <div class="badge"><div class="n">3</div><div class="d">MI</div></div>
         <div class="info">
           <div class="date">27. Mai 2026</div>
-          <div class="title">Vatikan &amp; Petersdom</div>
-          <div class="loc">⛪ Rom West</div>
+          <div class="title">Vatikan &amp; Rom-Klassiker</div>
+          <div class="loc">⛪ Vatikan · Spanische Treppe · Trevi</div>
         </div>
         <span class="arrow">›</span>
       </summary>
       <div class="content">
         <div class="block"><div class="time">08:30</div><div class="txt">
+          <b>⚠️ Vatikan Dresscode</b>
+          <div class="d"><b>Schultern UND Knie bedeckt</b> – für alle, auch Kinder! Tuch zum Überziehen einpacken, sonst kein Eintritt.</div></div></div>
+        <div class="block"><div class="time">09:00</div><div class="txt">
           <b>Vatikanische Museen</b>
-          <div class="d">17 € / 8 € · Familien-Audiotour mit Rätseln (7 €) · online buchen!</div></div></div>
+          <div class="d">17 € / 8 € · Familien-Audiotour mit Rätseln (7 €) · online mit Zeitslot buchen!</div></div></div>
         <div class="block"><div class="time">11:30</div><div class="txt">
           <b>Petersplatz &amp; Petersdom</b>
-          <div class="d">Kostenfrei · max. 45 Min · Kuppelaufstieg optional</div></div></div>
+          <div class="d">Kostenfrei · max. 45 Min · Kuppelaufstieg nur bei Lust (320 Stufen)</div></div></div>
         <div class="block"><div class="time">13:00</div><div class="txt">
           <b>Mittagessen im Borgo Pio</b>
           <div class="d">Ruhige Gassen abseits der Ströme</div></div></div>
-        <div class="block"><div class="time">15:00</div><div class="txt">
+        <div class="block"><div class="time">14:30</div><div class="txt">
+          <b>🌿 Siesta im Hotel (wichtig!)</b>
+          <div class="d">Nach Vatikan ist bei den Kindern kein Strom mehr. 1,5 h Pause ist Pflicht.</div></div></div>
+        <div class="block"><div class="time">17:00</div><div class="txt">
           <b>🎈 Villa Borghese – Belohnung</b>
-          <div class="d">Tretboote · Pony · Spielplatz · Zoo (18 €) · Explora Kindermuseum</div></div></div>
-        <div class="block"><div class="time">18:00</div><div class="txt">
-          <b>Engelsburg &amp; Engelsbrücke</b>
-          <div class="d">Von außen bewundern – abends beleuchtet</div></div></div>
+          <div class="d">Tretboote auf dem Teich, Spielplatz, Pony-Kutsche · oder Explora Kindermuseum (8–10 €)</div></div></div>
+        <div class="block"><div class="time">18:30</div><div class="txt">
+          <b>Spanische Treppe</b>
+          <div class="d">Nur 5 Min. Fußweg von Villa Borghese – Sonnenuntergangs-Foto-Moment ✨</div></div></div>
+        <div class="block"><div class="time">19:15</div><div class="txt">
+          <b>🪙 Trevi-Brunnen</b>
+          <div class="d">10 Min. Fußweg. Münze mit <b>rechter Hand über linke Schulter</b> werfen – du kommst sicher wieder nach Rom!</div></div></div>
+        <div class="block"><div class="time">19:45</div><div class="txt">
+          <b>🍦 Gelato bei Giolitti</b>
+          <div class="d">Wahrscheinlich das beste Eis Roms, 2 Min. vom Trevi. Dann Taxi zum Abendessen nahe Hotel.</div></div></div>
       </div>
     </details>
 
@@ -295,21 +403,27 @@
         <span class="arrow">›</span>
       </summary>
       <div class="content">
+        <div class="block"><div class="time">08:30</div><div class="txt">
+          <b>Früh raus, Leihwagen abholen</b>
+          <div class="d">Sunnycars am Termini · Sitzerhöhung prüfen (in Italien Pflicht bis 150 cm!) · Wasser für alle</div></div></div>
         <div class="block"><div class="time">09:00</div><div class="txt">
-          <b>Leihwagen abholen (Termini)</b>
-          <div class="d">Sunnycars Kompaktklasse · Kindersitz bestellt?</div></div></div>
-        <div class="block"><div class="time">09:30</div><div class="txt">
           <b>Fahrt A1/A2 → Pompeji</b>
-          <div class="d">ca. 240 km · 2h40 · Stopp beim Autogrill</div></div></div>
-        <div class="block"><div class="time">12:30</div><div class="txt">
-          <b>🏺 Ausgrabungsstätte Pompeji</b>
-          <div class="d">18 € / Kinder frei · Kinderführung auf Deutsch (~25 €) · Wasser &amp; Hut!</div></div></div>
-        <div class="block"><div class="time">17:30</div><div class="txt">
-          <b>Weiter nach Neapel</b>
-          <div class="d">Nur 28 km · Hotel mit Parkplatz anfahren (ZTL beachten!)</div></div></div>
+          <div class="d">ca. 240 km · 2h40 · 15 Min. Stopp beim Autogrill (Toilette, Kaffee, Panino)</div></div></div>
+        <div class="block"><div class="time">11:30</div><div class="txt">
+          <b>🏺 Pompeji – kompakte Variante (3 h)</b>
+          <div class="d"><b>Bewusst nur Hauptachse:</b> Forum → Bäckerei → Amphitheater → Villa dei Misteri. Rest weglassen – Kinder sind nach 3h durch. Tickets 18 € · Kinder frei · Online + Zeitslot buchen.</div></div></div>
+        <div class="block"><div class="time">14:30</div><div class="txt">
+          <b>Late Lunch am Ausgang</b>
+          <div class="d">Schnelles Panino oder Pasta in einer Trattoria direkt vor den Ausgrabungen</div></div></div>
+        <div class="block"><div class="time">15:30</div><div class="txt">
+          <b>Weiter nach Neapel (45 Min.)</b>
+          <div class="d">Nur 28 km · direkt zum Hotel mit Parkplatz (Hotel San Paolo) · ZTL Altstadt nicht selbst befahren!</div></div></div>
+        <div class="block"><div class="time">16:30</div><div class="txt">
+          <b>🏊 Hotel-Pool &amp; Ankommen</b>
+          <div class="d">Pool als Erholung nach langem Tag. Kinder toben, Eltern kippen um. Perfekter Ausklang.</div></div></div>
         <div class="block"><div class="time">19:30</div><div class="txt">
           <b>🍕 Original Pizza Napoletana</b>
-          <div class="d">Da Michele · Sorbillo · 50 Kalò (reservieren!)</div></div></div>
+          <div class="d">Da Michele · Sorbillo · 50 Kalò. Reservierung empfohlen, sonst 1 h Wartezeit!</div></div></div>
       </div>
     </details>
 
@@ -497,6 +611,26 @@
   </div>
 </section>
 
+<!-- PACKING LIST -->
+<section>
+  <h2><span class="ico">🎒</span> Pack- &amp; Vorbereitungsliste</h2>
+  <div class="pack" id="packList"></div>
+</section>
+
+<!-- EXPORT / INSTALL -->
+<section>
+  <h2><span class="ico">⚙️</span> Extras</h2>
+  <div class="actions">
+    <button class="btn" id="btnIcs">📅 Zum Kalender hinzufügen</button>
+    <a class="btn secondary" href="https://ajkuhendran-coder.github.io/italien-urlaub/" target="_blank">🔗 Seite teilen</a>
+  </div>
+  <div class="install-hint">
+    <div>📱</div>
+    <div><b>iPhone-Tipp:</b> Safari unten auf das Teilen-Symbol → <b>"Zum Home-Bildschirm"</b> →
+    die Seite läuft dann wie eine App und ist <b>offline</b> verfügbar (auch ohne Netz im Urlaub!).</div>
+  </div>
+</section>
+
 <!-- TIPS -->
 <section>
   <h2><span class="ico">💡</span> Goldene Regeln</h2>
@@ -505,10 +639,13 @@
       <li>🧘 <b>Eine große Sehenswürdigkeit pro Tag</b> – nicht mehr!</li>
       <li>🌞 Kultur am <b>Vormittag</b>, danach Siesta oder Pool.</li>
       <li>🍦 <b>Eis-Stopps sind keine Zeitverschwendung</b> – sie sind Reiseerinnerung.</li>
-      <li>📱 Tickets für Kolosseum, Vatikan &amp; Pompeji <b>online vorbuchen</b>.</li>
+      <li>📱 Tickets für Kolosseum, Vatikan &amp; Pompeji <b>online vorbuchen</b> (mit Zeitslot!).</li>
       <li>💧 Wasserflaschen mitnehmen – Rom hat über 2.500 Trinkbrunnen (<i>Nasoni</i>).</li>
       <li>🚗 In Neapel <b>nie</b> selbst in die Altstadt fahren (ZTL-Zone!).</li>
-      <li>🆘 Notruf Europa: <b>112</b></li>
+      <li>👕 Vatikan: Schultern &amp; Knie bedeckt – auch Kinder!</li>
+      <li>🪑 In Italien Kindersitz-/Sitzerhöhungs-Pflicht bis 150 cm / 12 J.</li>
+      <li>💶 Viele kleine Lokale nur Bargeld – immer 50–100 € dabei haben.</li>
+      <li>🆘 Notruf: <b>112</b> (allgemein) · <b>118</b> (Krankenwagen)</li>
     </ul>
   </div>
 </section>
@@ -518,6 +655,273 @@
 </footer>
 
 </main>
+
+<!-- Service Worker (macht Seite offline-fähig) -->
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function(){
+      navigator.serviceWorker.register('sw.js').catch(function(e){
+        console.warn('SW Registrierung fehlgeschlagen:', e);
+      });
+    });
+  }
+</script>
+
+<!-- Countdown -->
+<script>
+(function(){
+  var target = new Date('2026-05-25T08:00:00+02:00').getTime();
+  function pad(n){ return n < 10 ? '0' + n : '' + n; }
+  function tick(){
+    var now = Date.now();
+    var diff = target - now;
+    var cd = document.getElementById('countdown');
+    if(!cd) return;
+    if(diff <= 0){
+      cd.classList.add('over');
+      document.querySelector('.cd-title').textContent = 'Buon viaggio! 🇮🇹';
+      document.getElementById('cd-d').textContent = '—';
+      document.getElementById('cd-h').textContent = '—';
+      document.getElementById('cd-m').textContent = '—';
+      document.getElementById('cd-s').textContent = '—';
+      return;
+    }
+    var s = Math.floor(diff / 1000);
+    var d = Math.floor(s / 86400);  s -= d*86400;
+    var h = Math.floor(s / 3600);   s -= h*3600;
+    var m = Math.floor(s / 60);     s -= m*60;
+    document.getElementById('cd-d').textContent = d;
+    document.getElementById('cd-h').textContent = pad(h);
+    document.getElementById('cd-m').textContent = pad(m);
+    document.getElementById('cd-s').textContent = pad(s);
+  }
+  tick(); setInterval(tick, 1000);
+})();
+</script>
+
+<!-- Wetter (Open-Meteo – kostenlos, kein API-Key) -->
+<script>
+(function(){
+  var wxCode = {
+    0:'☀️',1:'🌤️',2:'⛅',3:'☁️',
+    45:'🌫️',48:'🌫️',
+    51:'🌦️',53:'🌦️',55:'🌦️',
+    61:'🌧️',63:'🌧️',65:'🌧️',
+    71:'🌨️',73:'🌨️',75:'🌨️',
+    80:'🌦️',81:'🌧️',82:'⛈️',
+    95:'⛈️',96:'⛈️',99:'⛈️'
+  };
+  var dows = ['SO','MO','DI','MI','DO','FR','SA'];
+
+  function loadCity(el){
+    var city = el.getAttribute('data-city');
+    var lat  = el.getAttribute('data-lat');
+    var lon  = el.getAttribute('data-lon');
+    el.innerHTML = '<div class="wx-head"><h3>'+city+'</h3>'+
+                   '<span class="status">Lade …</span></div>'+
+                   '<div class="wx-loading">Wetter wird geladen …</div>';
+    var url = 'https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+lon+
+              '&daily=weather_code,temperature_2m_max,temperature_2m_min'+
+              '&timezone=Europe%2FBerlin&start_date=2026-05-25&end_date=2026-05-31';
+    fetch(url).then(function(r){ return r.json(); }).then(function(data){
+      if(!data.daily || !data.daily.time){
+        el.querySelector('.wx-loading').textContent =
+          'Prognose noch nicht verfügbar (meist erst 14 Tage vorher).';
+        return;
+      }
+      var html = '<div class="wx-head"><h3>'+city+'</h3>'+
+                 '<span class="status">25.–31.5.2026</span></div>'+
+                 '<div class="wx-days">';
+      data.daily.time.forEach(function(t,i){
+        var d = new Date(t);
+        html += '<div class="wx-d">'+
+          '<div class="dow">'+dows[d.getDay()]+'</div>'+
+          '<div class="ic">'+(wxCode[data.daily.weather_code[i]]||'·')+'</div>'+
+          '<div class="tmax">'+Math.round(data.daily.temperature_2m_max[i])+'°</div>'+
+          '<div class="tmin">'+Math.round(data.daily.temperature_2m_min[i])+'°</div>'+
+          '</div>';
+      });
+      html += '</div>';
+      el.innerHTML = html;
+    }).catch(function(){
+      el.innerHTML = '<div class="wx-head"><h3>'+city+'</h3>'+
+                     '<span class="status">offline</span></div>'+
+                     '<div class="wx-loading">Keine Verbindung – '+
+                     'einmal online laden für Prognose.</div>';
+    });
+  }
+  document.querySelectorAll('.wx-city').forEach(loadCity);
+})();
+</script>
+
+<!-- Pack-Checkliste (mit localStorage) -->
+<script>
+(function(){
+  var groups = [
+    { icon:'📄', title:'Reise-Dokumente', items:[
+      'Personalausweis/Reisepass – alle 3 Personen',
+      'Europäische Krankenversicherungskarte (EGK)',
+      'Leihwagen-Buchungsbestätigung + Kreditkarte',
+      'Flug-Buchung / Online Check-in',
+      'Hotel-Buchungen Rom + Neapel ausgedruckt',
+      'Tickets Kolosseum + Vatikan + Pompeji (mit Zeitslot!)',
+      'Reiseversicherung (Stornoschutz + Gesundheit)'
+    ]},
+    { icon:'🎒', title:'Für die Kinder', items:[
+      'Kinderreisepass gültig prüfen',
+      'Kleiner Rucksack pro Kind',
+      'Kuscheltier + Einschlafhilfe',
+      'Kinder-Reisekissen fürs Auto',
+      'Buntstifte + Malbuch für Wartezeiten',
+      'Snacks für den Flug / Auto',
+      'Sonnencreme LF 50+ in Kinderformel',
+      'Sonnenhut + UV-Shirt fürs Meer',
+      'Badesachen + Schwimmhilfen',
+      'Geschlossene Schuhe (Pompeji-Boden!)'
+    ]},
+    { icon:'👕', title:'Kleidung – wichtig', items:[
+      'Tuch / Schal für Vatikan (Schultern bedecken!)',
+      'Lange Hose / Rock für Vatikan (Knie bedeckt)',
+      'Bequeme Wanderschuhe (Pompeji + Vesuv)',
+      'Leichte Sommerkleidung (20–26 °C)',
+      'Dünne Jacke für Abende',
+      'Flip-Flops / Sandalen'
+    ]},
+    { icon:'💊', title:'Apotheke & Gesundheit', items:[
+      'Pflaster (groß + klein)',
+      'Desinfektionsspray',
+      'Paracetamol / Ibuprofen (Erwachsene + Kinder)',
+      'Reisetabletten gegen Übelkeit',
+      'Mückenspray',
+      'After-Sun-Lotion',
+      'Thermometer',
+      'Eigene Medikamente'
+    ]},
+    { icon:'📱', title:'Technik', items:[
+      'Adapter Typ C/F (in Italien meist nicht nötig)',
+      'Powerbank + USB-Kabel',
+      'Handy mit offline-Karten (Google Maps Gebiet laden!)',
+      'Dashboard zum Home-Screen hinzugefügt',
+      'Kopfhörer für Kinder',
+      'Kamera + SD-Karte (optional)'
+    ]},
+    { icon:'💶', title:'Geld', items:[
+      'Kreditkarte (Hauptkarte)',
+      'Ersatzkarte EC/Giro',
+      '150–200 € Bargeld (viele Lokale nur Cash)',
+      'Kleingeld für Trinkgeld / Nasoni-Münzen'
+    ]},
+    { icon:'📞', title:'Notfall-Kontakte notieren', items:[
+      '112 – allgemeiner Notruf (auch ohne SIM)',
+      '118 – Krankenwagen Italien',
+      'Hotel Rom Marcantonio: Via Cavour 36, +39 06 4788 2330',
+      'Hotel Neapel San Paolo: siehe Buchung',
+      'Botschaft Deutschland Rom: +39 06 492131',
+      'Deutsche Auslandshotline Krankenversicherung'
+    ]}
+  ];
+
+  var storage = window.localStorage;
+  var saved = {};
+  try{ saved = JSON.parse(storage.getItem('pack-list-v1') || '{}'); }catch(e){}
+
+  var root = document.getElementById('packList');
+  if(!root) return;
+
+  var allItems = [];
+  var html = '';
+  groups.forEach(function(g, gi){
+    html += '<div class="pack-group"><h4>'+g.icon+' '+g.title+'</h4>';
+    g.items.forEach(function(item, ii){
+      var id = 'p-'+gi+'-'+ii;
+      allItems.push(id);
+      var chk = saved[id] ? 'checked' : '';
+      var cls = saved[id] ? 'pack-item done' : 'pack-item';
+      html += '<label class="'+cls+'"><input type="checkbox" id="'+id+'" '+chk+'>'+
+              '<span>'+item+'</span></label>';
+    });
+    html += '</div>';
+  });
+  html += '<div class="pack-progress">'+
+          '<span id="pct">0%</span>'+
+          '<div class="pbar"><span id="pbar" style="width:0%"></span></div>'+
+          '<span id="pcount">0 / '+allItems.length+'</span>'+
+          '</div>';
+  root.innerHTML = html;
+
+  function updateProgress(){
+    var done = 0;
+    allItems.forEach(function(id){
+      if(document.getElementById(id).checked) done++;
+    });
+    var pct = Math.round(done / allItems.length * 100);
+    document.getElementById('pct').textContent = pct + '%';
+    document.getElementById('pcount').textContent = done + ' / ' + allItems.length;
+    document.getElementById('pbar').style.width = pct + '%';
+  }
+
+  root.addEventListener('change', function(e){
+    if(e.target.type !== 'checkbox') return;
+    var id = e.target.id;
+    saved[id] = e.target.checked;
+    try{ storage.setItem('pack-list-v1', JSON.stringify(saved)); }catch(err){}
+    e.target.closest('.pack-item').classList.toggle('done', e.target.checked);
+    updateProgress();
+  });
+  updateProgress();
+})();
+</script>
+
+<!-- Kalender-Export (.ics) -->
+<script>
+(function(){
+  var btn = document.getElementById('btnIcs');
+  if(!btn) return;
+  var events = [
+    { d:'20260525T060000', dEnd:'20260525T100000', title:'Flug nach Rom (FCO)',          loc:'Flughafen Deutschland' },
+    { d:'20260526T090000', dEnd:'20260526T123000', title:'Kolosseum + Forum + Palatin',  loc:'Piazza del Colosseo, Rom' },
+    { d:'20260527T090000', dEnd:'20260527T113000', title:'Vatikanische Museen',          loc:'Viale Vaticano, Rom' },
+    { d:'20260527T183000', dEnd:'20260527T194500', title:'Spanische Treppe & Trevi',     loc:'Rom Zentrum' },
+    { d:'20260528T083000', dEnd:'20260528T113000', title:'Fahrt Rom → Pompeji',          loc:'A1/A2 Autobahn' },
+    { d:'20260528T113000', dEnd:'20260528T143000', title:'Pompeji Ausgrabungen',         loc:'Pompeji Scavi' },
+    { d:'20260529T090000', dEnd:'20260529T170000', title:'Amalfiküste: Sorrent + Positano', loc:'Amalfi-Küste' },
+    { d:'20260530T090000', dEnd:'20260530T130000', title:'Vesuv-Aufstieg',               loc:'Monte Vesuvio' },
+    { d:'20260531T090000', dEnd:'20260531T120000', title:'Rückfahrt Neapel → FCO',       loc:'Rom Fiumicino' },
+    { d:'20260531T143000', dEnd:'20260531T170000', title:'Rückflug nach Deutschland',    loc:'FCO → DE' }
+  ];
+
+  function ics(){
+    var lines = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//Italien-Urlaub 2026//DE',
+      'CALSCALE:GREGORIAN'
+    ];
+    events.forEach(function(e, i){
+      lines.push('BEGIN:VEVENT');
+      lines.push('UID:italien-2026-'+i+'@kuhendran');
+      lines.push('DTSTAMP:20260419T000000Z');
+      lines.push('DTSTART;TZID=Europe/Berlin:'+e.d);
+      lines.push('DTEND;TZID=Europe/Berlin:'+e.dEnd);
+      lines.push('SUMMARY:'+e.title);
+      lines.push('LOCATION:'+e.loc);
+      lines.push('END:VEVENT');
+    });
+    lines.push('END:VCALENDAR');
+    return lines.join('\r\n');
+  }
+
+  btn.addEventListener('click', function(){
+    var blob = new Blob([ics()], {type:'text/calendar;charset=utf-8'});
+    var url  = URL.createObjectURL(blob);
+    var a    = document.createElement('a');
+    a.href = url;
+    a.download = 'Italien-Urlaub-2026.ics';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 500);
+  });
+})();
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
@@ -640,40 +1044,75 @@
   });
 
   // ------ Routen-Linien pro Tag ------
-  function route(points, color, dash, label){
-    L.polyline(points, {
+  // Zeichnet zuerst eine gerade Linie als Fallback, holt dann die echte
+  // Straßenroute via OSRM und ersetzt die Linie. Bei Offline/Fehler bleibt
+  // die gerade Linie sichtbar.
+  function route(points, color, opts){
+    opts = opts || {};
+    var fallback = L.polyline(points, {
       color:color, weight:5, opacity:.85,
-      dashArray: dash||null, lineCap:'round', lineJoin:'round'
-    }).addTo(map).bindPopup('<b>'+label+'</b>');
+      dashArray: opts.dash||null, lineCap:'round', lineJoin:'round'
+    }).addTo(map).bindPopup('<b>'+opts.label+'</b>');
+
+    // Nur für Auto-Routen echte Straßen laden (keine Flugzeug/Zug-Linien)
+    if(opts.profile === false) return fallback;
+    var profile = opts.profile || 'driving';
+
+    var coords = points.map(function(p){ return p[1]+','+p[0]; }).join(';');
+    var url = 'https://router.project-osrm.org/route/v1/'+profile+
+              '/'+coords+'?overview=full&geometries=geojson';
+
+    // Timeout nach 8 Sekunden → Fallback bleibt
+    var done = false;
+    var timer = setTimeout(function(){ done = true; }, 8000);
+
+    fetch(url).then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(data){
+        if(done || !data || !data.routes || !data.routes[0]) return;
+        clearTimeout(timer);
+        var geo = data.routes[0].geometry.coordinates
+          .map(function(c){ return [c[1], c[0]]; });
+        var poly = L.polyline(geo, {
+          color:color, weight:5, opacity:.9,
+          dashArray: opts.dash||null, lineCap:'round', lineJoin:'round'
+        }).addTo(map).bindPopup('<b>'+opts.label+'</b>');
+        map.removeLayer(fallback);
+      })
+      .catch(function(){ /* still Fallback behalten */ });
+
+    return fallback;
   }
 
-  // Tag 1: FCO → Rom Zentrum (per Zug, gestrichelt)
-  route([stages[0].ll, stages[1].ll], '#0E6FB8', '6,6',
-        '🚆 Tag 1: FCO → Rom Termini (Leonardo-Express)');
+  // Tag 1: FCO → Rom Zentrum (Zug – keine OSRM-Route, Luftlinie gestrichelt)
+  route([stages[0].ll, stages[1].ll], '#0E6FB8',
+        { dash:'6,6', profile:false,
+          label:'🚆 Tag 1: FCO → Rom Termini (Leonardo-Express, 32 Min)' });
 
-  // Tag 2: Hotel → Kolosseum (Fußweg)
-  route([stages[1].ll, stages[2].ll], '#0E6FB8', '2,6',
-        '🚶 Tag 2: Hotel → Kolosseum (zu Fuß)');
+  // Tag 2: Hotel → Kolosseum (Fußweg, echt)
+  route([stages[1].ll, stages[2].ll], '#0E6FB8',
+        { dash:'2,6', profile:'foot',
+          label:'🚶 Tag 2: Hotel → Kolosseum (10 Min zu Fuß)' });
 
-  // Tag 3: Hotel → Vatikan
-  route([stages[1].ll, stages[3].ll], '#0E6FB8', '2,6',
-        '🚶 Tag 3: Hotel → Vatikan');
+  // Tag 3: Hotel → Vatikan → Spanische Treppe → Trevi → Hotel (Fußweg + Taxi)
+  route([stages[1].ll, stages[3].ll], '#0E6FB8',
+        { dash:'2,6', profile:'foot',
+          label:'🚶 Tag 3: Hotel → Vatikan' });
 
-  // Tag 4: Rom Zentrum → Pompeji → Neapel (Auto, durchgezogen)
-  route([stages[1].ll, stages[4].ll, stages[5].ll], '#D72638', null,
-        '🚗 Tag 4: Rom → Pompeji → Neapel (ca. 270 km)');
+  // Tag 4: Rom Zentrum → Pompeji → Neapel (echte Auto-Route über A1/A2)
+  route([stages[1].ll, stages[4].ll, stages[5].ll], '#D72638',
+        { label:'🚗 Tag 4: Rom → Pompeji → Neapel (ca. 270 km, ~3h40)' });
 
-  // Tag 5: Neapel → Sorrent → Positano → zurück nach Neapel
-  route([stages[5].ll, stages[6].ll, stages[7].ll, stages[5].ll], '#F4A261', null,
-        '🚗 Tag 5: Neapel → Sorrent → Positano → Neapel (ca. 110 km)');
+  // Tag 5: Neapel → Sorrent → Positano → zurück
+  route([stages[5].ll, stages[6].ll, stages[7].ll, stages[5].ll], '#F4A261',
+        { label:'🚗 Tag 5: Neapel → Sorrent → Positano → Neapel (ca. 110 km)' });
 
-  // Tag 6: Neapel → Vesuv → Herculaneum → zurück nach Neapel
-  route([stages[5].ll, stages[8].ll, stages[9].ll, stages[5].ll], '#9B5DE5', null,
-        '🌋 Tag 6: Neapel → Vesuv → Herculaneum → Neapel (ca. 60 km)');
+  // Tag 6: Neapel → Vesuv → Herculaneum → zurück
+  route([stages[5].ll, stages[8].ll, stages[9].ll, stages[5].ll], '#9B5DE5',
+        { label:'🌋 Tag 6: Neapel → Vesuv → Herculaneum → Neapel (ca. 60 km)' });
 
-  // Tag 7: Neapel → Rom FCO (Rückfahrt + Heimflug)
-  route([stages[5].ll, stages[10].ll], '#2A9D8F', null,
-        '🚗 Tag 7: Neapel → Rom FCO (ca. 220 km)');
+  // Tag 7: Neapel → Rom FCO (Rückfahrt)
+  route([stages[5].ll, stages[10].ll], '#2A9D8F',
+        { label:'🚗 Tag 7: Neapel → Rom FCO (ca. 220 km, ~2h30)' });
 
   // Karte genau auf alle Stationen zentrieren
   var allBounds = L.latLngBounds(stages.map(function(s){ return s.ll; }));
