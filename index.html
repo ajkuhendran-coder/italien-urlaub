@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0E6FB8">
+<title>Italien-Urlaub · 25.–30. Mai 2026</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root{
+    --primary:#0E6FB8;
+    --accent:#D72638;
+    --sand:#FFF8E7;
+    --sea:#F2F7FB;
+    --ink:#1B2631;
+    --muted:#65768A;
+    --border:#E2E8F0;
+    --green:#2A9D8F;
+    --yellow:#F4A261;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0;background:#f5f7fb;color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    font-size:16px;line-height:1.45;
+  }
+  img{max-width:100%;display:block}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:linear-gradient(135deg,#0E6FB8 0%,#1a8dd8 50%,#D72638 100%);
+    color:#fff;padding:calc(env(safe-area-inset-top) + 24px) 20px 28px;
+    border-radius:0 0 28px 28px;
+    box-shadow:0 10px 24px rgba(14,111,184,.18);
+    position:relative;overflow:hidden;
+  }
+  .hero::before{content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 85% 15%,rgba(255,255,255,.25),transparent 50%);
+    pointer-events:none;}
+  .flag{display:inline-flex;gap:3px;margin-bottom:10px;font-size:.78rem;
+    letter-spacing:.12em;text-transform:uppercase;opacity:.9}
+  .flag span{width:10px;height:14px;border-radius:2px}
+  .flag .g{background:#009246}.flag .w{background:#fff}.flag .r{background:#CE2B37}
+  .hero h1{margin:0 0 4px;font-size:1.8rem;font-weight:800;letter-spacing:-.02em}
+  .hero p.sub{margin:0;opacity:.92;font-size:1rem}
+  .hero .dates{margin-top:14px;display:inline-flex;align-items:center;gap:8px;
+    background:rgba(255,255,255,.18);backdrop-filter:blur(8px);
+    padding:8px 14px;border-radius:999px;font-weight:600;font-size:.92rem}
+  .hero .persons{margin-top:6px;font-size:.88rem;opacity:.85}
+
+  /* ---------- CONTAINER ---------- */
+  main{padding:20px 16px 40px;max-width:780px;margin:0 auto}
+  section{margin-top:22px}
+  h2{font-size:1.15rem;margin:0 0 10px;letter-spacing:-.01em;display:flex;align-items:center;gap:8px}
+  h2 .ico{font-size:1.2rem}
+
+  /* ---------- STATS ---------- */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:-30px;
+    position:relative;z-index:2}
+  .stat{background:#fff;border-radius:16px;padding:12px 10px;text-align:center;
+    box-shadow:0 6px 18px rgba(0,0,0,.06);border:1px solid var(--border)}
+  .stat .v{font-size:1.15rem;font-weight:800;color:var(--primary);line-height:1}
+  .stat .l{font-size:.68rem;color:var(--muted);text-transform:uppercase;
+    letter-spacing:.06em;margin-top:4px}
+  @media(max-width:420px){
+    .stat .v{font-size:1rem}
+    .stat .l{font-size:.62rem}
+  }
+
+  /* ---------- MAP ---------- */
+  #map{height:320px;border-radius:16px;overflow:hidden;
+    border:1px solid var(--border);box-shadow:0 6px 18px rgba(0,0,0,.06);z-index:1}
+  .legend{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
+  .chip{display:inline-flex;align-items:center;gap:6px;background:#fff;
+    border:1px solid var(--border);padding:5px 10px;border-radius:999px;
+    font-size:.78rem;font-weight:600}
+  .chip .dot{width:10px;height:10px;border-radius:50%}
+
+  /* ---------- TIMELINE ---------- */
+  .days{display:flex;flex-direction:column;gap:12px}
+  .day{background:#fff;border-radius:18px;overflow:hidden;
+    border:1px solid var(--border);box-shadow:0 4px 14px rgba(0,0,0,.04)}
+  .day summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;
+    align-items:center;gap:12px;user-select:none}
+  .day summary::-webkit-details-marker{display:none}
+  .badge{width:44px;height:44px;border-radius:12px;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;color:#fff;font-weight:800;
+    font-size:.8rem;line-height:1;flex-shrink:0;
+    background:linear-gradient(135deg,var(--primary),var(--accent))}
+  .badge .n{font-size:1rem}
+  .badge .d{font-size:.58rem;opacity:.85;margin-top:2px;letter-spacing:.05em}
+  .day .info{flex:1;min-width:0}
+  .day .info .date{font-size:.74rem;color:var(--muted);text-transform:uppercase;
+    letter-spacing:.08em;font-weight:600}
+  .day .info .title{font-weight:700;font-size:1.02rem;margin-top:2px}
+  .day .info .loc{font-size:.85rem;color:var(--muted);margin-top:2px}
+  .day summary .arrow{color:var(--muted);transition:transform .2s;font-size:1.3rem}
+  .day[open] summary .arrow{transform:rotate(90deg)}
+  .day .content{padding:4px 16px 16px;border-top:1px solid var(--border)}
+  .block{display:flex;gap:12px;padding:12px 0;border-bottom:1px dashed #eef1f6}
+  .block:last-child{border-bottom:0;padding-bottom:4px}
+  .block .time{flex:0 0 72px;color:var(--accent);font-weight:700;font-size:.85rem;padding-top:2px}
+  .block .txt{flex:1;min-width:0}
+  .block .txt b{font-weight:700;color:var(--ink)}
+  .block .txt .d{color:var(--muted);margin-top:2px;font-size:.92rem}
+
+  /* ---------- CARDS (hotels etc.) ---------- */
+  .cards{display:grid;gap:12px;grid-template-columns:1fr;
+    scroll-snap-type:x mandatory}
+  @media(min-width:620px){.cards{grid-template-columns:1fr 1fr}}
+  .card{background:#fff;border-radius:16px;padding:14px;border:1px solid var(--border);
+    box-shadow:0 3px 10px rgba(0,0,0,.04)}
+  .card .kicker{font-size:.72rem;font-weight:700;letter-spacing:.09em;
+    text-transform:uppercase;color:var(--accent)}
+  .card h3{margin:4px 0 2px;font-size:1.05rem}
+  .card .addr{color:var(--muted);font-size:.85rem}
+  .card .price{margin-top:8px;font-weight:700;color:var(--primary);font-size:.95rem}
+  .card .tags{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px}
+  .tag{font-size:.72rem;background:var(--sea);border-radius:999px;padding:3px 9px;
+    color:var(--primary);font-weight:600}
+  .tag.warn{background:#FFF4E5;color:#B25000}
+  .tag.ok{background:#E7F7F2;color:var(--green)}
+
+  /* ---------- BUDGET BARS ---------- */
+  .budget-row{display:flex;align-items:center;gap:10px;padding:10px 0;
+    border-bottom:1px dashed #eef1f6}
+  .budget-row:last-child{border-bottom:0}
+  .budget-row .lbl{flex:1;font-size:.95rem}
+  .bar{flex:0 0 120px;height:7px;background:#eef1f6;border-radius:999px;overflow:hidden}
+  .bar span{display:block;height:100%;background:linear-gradient(90deg,var(--primary),#55a8e0)}
+  .budget-row .amt{flex:0 0 70px;text-align:right;font-weight:700;color:var(--primary);
+    font-size:.92rem}
+  .total{margin-top:10px;padding:12px;background:var(--sea);border-radius:12px;
+    display:flex;justify-content:space-between;align-items:center}
+  .total .v{font-size:1.35rem;font-weight:800;color:var(--primary)}
+
+  /* ---------- TIPS ---------- */
+  .tips{background:linear-gradient(180deg,var(--sand),#fff);border-radius:16px;
+    padding:16px;border:1px solid #F3E8C9}
+  .tips ul{padding-left:18px;margin:0}
+  .tips li{margin:6px 0}
+
+  footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:30px;
+    padding-bottom:env(safe-area-inset-bottom)}
+
+  /* Tap highlights for iOS */
+  details summary:active{background:#f8fafc}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="flag"><span class="g"></span><span class="w"></span><span class="r"></span>
+    &nbsp;Italia · Famiglia</div>
+  <h1>Italien-Urlaub 2026</h1>
+  <p class="sub">Rom &amp; Neapel · entspannter Familienplan</p>
+  <div class="dates">📅 Mo 25.05. – Sa 30.05.2026</div>
+  <div class="persons">👩 1 Erwachsene · 👧 11 J · 👦 7 J</div>
+</header>
+
+<main>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="v">6</div><div class="l">Tage</div></div>
+  <div class="stat"><div class="v">5</div><div class="l">Nächte</div></div>
+  <div class="stat"><div class="v">2</div><div class="l">Städte</div></div>
+  <div class="stat"><div class="v">~1.6k€</div><div class="l">Budget</div></div>
+</div>
+
+<!-- MAP -->
+<section>
+  <h2><span class="ico">🗺️</span> Route auf der Karte</h2>
+  <div id="map"></div>
+  <div class="legend">
+    <span class="chip"><span class="dot" style="background:#0E6FB8"></span>Übernachtung</span>
+    <span class="chip"><span class="dot" style="background:#D72638"></span>Sehenswürdigkeit</span>
+    <span class="chip"><span class="dot" style="background:#F4A261"></span>Ausflugsziel</span>
+    <span class="chip">🚗 Autofahrt</span>
+    <span class="chip">✈️ Flug</span>
+  </div>
+</section>
+
+<!-- TAGE -->
+<section>
+  <h2><span class="ico">📋</span> Tag-für-Tag Fahrplan</h2>
+  <div class="days">
+
+    <details class="day" open>
+      <summary>
+        <div class="badge"><div class="n">1</div><div class="d">MO</div></div>
+        <div class="info">
+          <div class="date">25. Mai 2026</div>
+          <div class="title">Anreise nach Rom</div>
+          <div class="loc">✈️ Deutschland → 🏛️ Rom</div>
+        </div>
+        <span class="arrow">›</span>
+      </summary>
+      <div class="content">
+        <div class="block"><div class="time">Vorm.</div><div class="txt">
+          <b>Flug nach Rom Fiumicino (FCO)</b>
+          <div class="d">Leonardo-Express zum Bahnhof Termini (32 Min, 14 €)</div></div></div>
+        <div class="block"><div class="time">Mittag</div><div class="txt">
+          <b>Hotel Check-in</b><div class="d">Koffer ablegen, kurz ausruhen</div></div></div>
+        <div class="block"><div class="time">13:30</div><div class="txt">
+          <b>Erster Bummel</b><div class="d">Piazza Navona · Pantheon · Eis bei Frigidarium</div></div></div>
+        <div class="block"><div class="time">17:00</div><div class="txt">
+          <b>Spanische Treppe</b><div class="d">Bei Sonnenuntergang – Instagram-Moment!</div></div></div>
+        <div class="block"><div class="time">19:00</div><div class="txt">
+          <b>Pizza zum Abend</b><div class="d">Kinderfreundliche Pizzeria, dann zurück ins Hotel</div></div></div>
+      </div>
+    </details>
+
+    <details class="day">
+      <summary>
+        <div class="badge"><div class="n">2</div><div class="d">DI</div></div>
+        <div class="info">
+          <div class="date">26. Mai 2026</div>
+          <div class="title">Antikes Rom</div>
+          <div class="loc">🏛️ Kolosseum · Forum · Palatin</div>
+        </div>
+        <span class="arrow">›</span>
+      </summary>
+      <div class="content">
+        <div class="block"><div class="time">09:00</div><div class="txt">
+          <b>Kolosseum + Forum + Palatin</b>
+          <div class="d">Kombiticket 18 € · Kinderführung auf Deutsch empfohlen (GetYourGuide ~25 €)</div></div></div>
+        <div class="block"><div class="time">12:30</div><div class="txt">
+          <b>Pizza al Taglio Mittagessen</b>
+          <div class="d">Nach Gewicht – Kinder lieben es!</div></div></div>
+        <div class="block"><div class="time">14:00</div><div class="txt">
+          <b>🌿 Siesta im Hotel</b>
+          <div class="d">Die Pause ist Pflicht – sie rettet den Tag</div></div></div>
+        <div class="block"><div class="time">17:00</div><div class="txt">
+          <b>Trevi-Brunnen</b>
+          <div class="d">Münze werfen · Eis bei Giolitti</div></div></div>
+        <div class="block"><div class="time">19:30</div><div class="txt">
+          <b>Dinner in Trastevere</b>
+          <div class="d">Urig, kinderfreundlich, Livemusik in den Gassen</div></div></div>
+      </div>
+    </details>
+
+    <details class="day">
+      <summary>
+        <div class="badge"><div class="n">3</div><div class="d">MI</div></div>
+        <div class="info">
+          <div class="date">27. Mai 2026</div>
+          <div class="title">Vatikan &amp; Petersdom</div>
+          <div class="loc">⛪ Rom West</div>
+        </div>
+        <span class="arrow">›</span>
+      </summary>
+      <div class="content">
+        <div class="block"><div class="time">08:30</div><div class="txt">
+          <b>Vatikanische Museen</b>
+          <div class="d">17 € / 8 € · Familien-Audiotour mit Rätseln (7 €) · online buchen!</div></div></div>
+        <div class="block"><div class="time">11:30</div><div class="txt">
+          <b>Petersplatz &amp; Petersdom</b>
+          <div class="d">Kostenfrei · max. 45 Min · Kuppelaufstieg optional</div></div></div>
+        <div class="block"><div class="time">13:00</div><div class="txt">
+          <b>Mittagessen im Borgo Pio</b>
+          <div class="d">Ruhige Gassen abseits der Ströme</div></div></div>
+        <div class="block"><div class="time">15:00</div><div class="txt">
+          <b>🎈 Villa Borghese – Belohnung</b>
+          <div class="d">Tretboote · Pony · Spielplatz · Zoo (18 €) · Explora Kindermuseum</div></div></div>
+        <div class="block"><div class="time">18:00</div><div class="txt">
+          <b>Engelsburg &amp; Engelsbrücke</b>
+          <div class="d">Von außen bewundern – abends beleuchtet</div></div></div>
+      </div>
+    </details>
+
+    <details class="day">
+      <summary>
+        <div class="badge"><div class="n">4</div><div class="d">DO</div></div>
+        <div class="info">
+          <div class="date">28. Mai 2026</div>
+          <div class="title">Autofahrt &amp; Pompeji</div>
+          <div class="loc">🚗 Rom → Pompeji → Neapel</div>
+        </div>
+        <span class="arrow">›</span>
+      </summary>
+      <div class="content">
+        <div class="block"><div class="time">09:00</div><div class="txt">
+          <b>Leihwagen abholen (Termini)</b>
+          <div class="d">Sunnycars Kompaktklasse · Kindersitz bestellt?</div></div></div>
+        <div class="block"><div class="time">09:30</div><div class="txt">
+          <b>Fahrt A1/A2 → Pompeji</b>
+          <div class="d">ca. 240 km · 2h40 · Stopp beim Autogrill</div></div></div>
+        <div class="block"><div class="time">12:30</div><div class="txt">
+          <b>🏺 Ausgrabungsstätte Pompeji</b>
+          <div class="d">18 € / Kinder frei · Kinderführung auf Deutsch (~25 €) · Wasser &amp; Hut!</div></div></div>
+        <div class="block"><div class="time">17:30</div><div class="txt">
+          <b>Weiter nach Neapel</b>
+          <div class="d">Nur 28 km · Hotel mit Parkplatz anfahren (ZTL beachten!)</div></div></div>
+        <div class="block"><div class="time">19:30</div><div class="txt">
+          <b>🍕 Original Pizza Napoletana</b>
+          <div class="d">Da Michele · Sorbillo · 50 Kalò (reservieren!)</div></div></div>
+      </div>
+    </details>
+
+    <details class="day">
+      <summary>
+        <div class="badge"><div class="n">5</div><div class="d">FR</div></div>
+        <div class="info">
+          <div class="date">29. Mai 2026</div>
+          <div class="title">Meer-Tag: Sorrent &amp; Positano</div>
+          <div class="loc">🌊 Amalfiküste</div>
+        </div>
+        <span class="arrow">›</span>
+      </summary>
+      <div class="content">
+        <div class="block"><div class="time">09:00</div><div class="txt">
+          <b>Fahrt nach Sorrent</b>
+          <div class="d">50 km · 1h10 · Parken am Hafen</div></div></div>
+        <div class="block"><div class="time">10:30</div><div class="txt">
+          <b>🍋 Altstadt Sorrent</b>
+          <div class="d">Gassen, Zitronen-Spezialitäten, Limonata</div></div></div>
+        <div class="block"><div class="time">12:30</div><div class="txt">
+          <b>Küstenstraße nach Positano</b>
+          <div class="d">Langsam fahren – atemberaubend!</div></div></div>
+        <div class="block"><div class="time">13:30</div><div class="txt">
+          <b>🏖️ Strandtag Spiaggia Grande</b>
+          <div class="d">Sandspiel · Bad im Meer · Liegen optional ~20 €</div></div></div>
+        <div class="block"><div class="time">17:30</div><div class="txt">
+          <b>Rückfahrt nach Neapel</b></div></div>
+        <div class="block"><div class="time">19:30</div><div class="txt">
+          <b>Dinner am Lungomare</b>
+          <div class="d">Spaghetti alle Vongole · Sonnenuntergang mit Vesuv-Blick</div></div></div>
+      </div>
+    </details>
+
+    <details class="day">
+      <summary>
+        <div class="badge"><div class="n">6</div><div class="d">SA</div></div>
+        <div class="info">
+          <div class="date">30. Mai 2026</div>
+          <div class="title">Rückreise</div>
+          <div class="loc">🚗 Neapel → ✈️ Heimflug</div>
+        </div>
+        <span class="arrow">›</span>
+      </summary>
+      <div class="content">
+        <div class="block"><div class="time">08:00</div><div class="txt">
+          <b>Frühstück &amp; Check-out</b></div></div>
+        <div class="block"><div class="time">09:00</div><div class="txt">
+          <b>Fahrt Neapel → FCO</b>
+          <div class="d">220 km · 2h30 · min. 4h vor Abflug starten</div></div></div>
+        <div class="block"><div class="time">11:30</div><div class="txt">
+          <b>Leihwagen zurückgeben</b>
+          <div class="d">Schalter direkt am Flughafen Fiumicino</div></div></div>
+        <div class="block"><div class="time">14:00+</div><div class="txt">
+          <b>Rückflug nach Deutschland</b>
+          <div class="d">Ciao Italia! 🇮🇹</div></div></div>
+      </div>
+    </details>
+
+  </div>
+</section>
+
+<!-- HOTELS -->
+<section>
+  <h2><span class="ico">🏨</span> Unterkünfte</h2>
+  <div class="cards">
+    <div class="card">
+      <div class="kicker">Rom · 3 Nächte</div>
+      <h3>Hotel Marcantonio</h3>
+      <div class="addr">Via Cavour · 400 m Kolosseum</div>
+      <div class="price">ca. 150 €/Nacht · Vierbett</div>
+      <div class="tags">
+        <span class="tag ok">Familien-Zimmer</span>
+        <span class="tag">Frühstück inkl.</span>
+        <span class="tag">Termini 5 Min</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="kicker">Neapel · 2 Nächte</div>
+      <h3>Hotel San Paolo</h3>
+      <div class="addr">mit Privatparkplatz &amp; Pool</div>
+      <div class="price">ca. 120 €/Nacht · 4★</div>
+      <div class="tags">
+        <span class="tag ok">Pool!</span>
+        <span class="tag">Eigener Parkplatz</span>
+        <span class="tag warn">Taxi in Altstadt</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLUG & AUTO -->
+<section>
+  <h2><span class="ico">✈️</span> Transport</h2>
+  <div class="cards">
+    <div class="card">
+      <div class="kicker">Empfohlener Flug</div>
+      <h3>Eurowings STR ↔ FCO</h3>
+      <div class="addr">Stuttgart → Rom Fiumicino · 1h45</div>
+      <div class="price">ca. 110 €/Person · ~330 € Familie</div>
+      <div class="tags">
+        <span class="tag">Handgepäck inkl.</span>
+        <span class="tag ok">FCO zentrumsnah</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="kicker">Spar-Alternative</div>
+      <h3>Ryanair FRA ↔ CIA</h3>
+      <div class="addr">Frankfurt → Rom Ciampino</div>
+      <div class="price">ca. 89 €/Person · ~270 € Familie</div>
+      <div class="tags">
+        <span class="tag warn">Nur Handgepäck</span>
+        <span class="tag">Bus zum Zentrum</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="kicker">Leihwagen 3 Tage</div>
+      <h3>Sunnycars Kompaktklasse</h3>
+      <div class="addr">Abholung Termini · Rückgabe FCO</div>
+      <div class="price">ca. 125 € · inkl. Vollkasko</div>
+      <div class="tags">
+        <span class="tag ok">Voll versichert</span>
+        <span class="tag">Kindersitz ~5 €/Tag</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUDGET -->
+<section>
+  <h2><span class="ico">💰</span> Budget-Übersicht</h2>
+  <div class="card">
+    <div class="budget-row"><span class="lbl">Flüge</span>
+      <span class="bar"><span style="width:20%"></span></span><span class="amt">330 €</span></div>
+    <div class="budget-row"><span class="lbl">Hotel Rom (3 N)</span>
+      <span class="bar"><span style="width:27%"></span></span><span class="amt">450 €</span></div>
+    <div class="budget-row"><span class="lbl">Hotel Neapel (2 N)</span>
+      <span class="bar"><span style="width:14%"></span></span><span class="amt">240 €</span></div>
+    <div class="budget-row"><span class="lbl">Leihwagen</span>
+      <span class="bar"><span style="width:7%"></span></span><span class="amt">125 €</span></div>
+    <div class="budget-row"><span class="lbl">Tank + Maut</span>
+      <span class="bar"><span style="width:6%"></span></span><span class="amt">105 €</span></div>
+    <div class="budget-row"><span class="lbl">Eintritte</span>
+      <span class="bar"><span style="width:5%"></span></span><span class="amt">80 €</span></div>
+    <div class="budget-row"><span class="lbl">Verpflegung</span>
+      <span class="bar"><span style="width:13%"></span></span><span class="amt">220 €</span></div>
+    <div class="budget-row"><span class="lbl">Extras (Eis, Taxi, Souvenirs)</span>
+      <span class="bar"><span style="width:8%"></span></span><span class="amt">114 €</span></div>
+    <div class="total"><span>Gesamt Familie</span><span class="v">≈ 1.664 €</span></div>
+  </div>
+</section>
+
+<!-- TIPS -->
+<section>
+  <h2><span class="ico">💡</span> Goldene Regeln</h2>
+  <div class="tips">
+    <ul>
+      <li>🧘 <b>Eine große Sehenswürdigkeit pro Tag</b> – nicht mehr!</li>
+      <li>🌞 Kultur am <b>Vormittag</b>, danach Siesta oder Pool.</li>
+      <li>🍦 <b>Eis-Stopps sind keine Zeitverschwendung</b> – sie sind Reiseerinnerung.</li>
+      <li>📱 Tickets für Kolosseum, Vatikan &amp; Pompeji <b>online vorbuchen</b>.</li>
+      <li>💧 Wasserflaschen mitnehmen – Rom hat über 2.500 Trinkbrunnen (<i>Nasoni</i>).</li>
+      <li>🚗 In Neapel <b>nie</b> selbst in die Altstadt fahren (ZTL-Zone!).</li>
+      <li>🆘 Notruf Europa: <b>112</b></li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  Made for a <b>ruhigen</b> Familien-Urlaub · 🇮🇹 Buona vacanza!
+</footer>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function(){
+  if (typeof L === 'undefined') {
+    // Fallback: Leaflet konnte nicht geladen werden (z.B. offline oder blockiert)
+    var el = document.getElementById('map');
+    if (el) {
+      el.style.height = 'auto';
+      el.style.padding = '24px';
+      el.style.background = '#FFF8E7';
+      el.style.textAlign = 'center';
+      el.style.lineHeight = '1.5';
+      el.innerHTML =
+        '<div style="font-size:2rem;margin-bottom:8px">🗺️</div>' +
+        '<b>Karte offline nicht verfügbar</b><br>' +
+        '<span style="color:#65768A;font-size:.9rem">' +
+        'Bitte mit Internetverbindung öffnen, um die interaktive Karte zu sehen.<br><br>' +
+        '<b>Route:</b><br>' +
+        '✈️ Deutschland → 🏛️ Rom (Tag 1–3)<br>' +
+        '🚗 Rom → 🏺 Pompeji → 🌋 Neapel (Tag 4)<br>' +
+        '🚗 Neapel → 🍋 Sorrent → 🌊 Positano (Tag 5)<br>' +
+        '🚗 Neapel → ✈️ Rom FCO → Heimat (Tag 6)</span>';
+    }
+    return;
+  }
+
+  var map = L.map('map', {scrollWheelZoom:false, tap:true})
+    .setView([41.3, 13.8], 7);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: '© OpenStreetMap'
+  }).addTo(map);
+
+  function mk(latlng, color, label, details){
+    const icon = L.divIcon({
+      className:'', iconSize:[28,28],
+      html:`<div style="width:28px;height:28px;background:${color};border:3px solid #fff;
+              border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,.3);
+              display:flex;align-items:center;justify-content:center;color:#fff;
+              font-weight:700;font-size:12px">${label}</div>`
+    });
+    return L.marker(latlng, {icon}).addTo(map).bindPopup(`<b>${details}</b>`);
+  }
+
+  // Übernachtungen (blau)
+  mk([41.9028, 12.4964], '#0E6FB8', '1', 'Rom · Tag 1–3 (Hotel Marcantonio)');
+  mk([40.8518, 14.2681], '#0E6FB8', '2', 'Neapel · Tag 4–5 (Hotel San Paolo)');
+
+  // Sehenswürdigkeiten (rot)
+  mk([41.8902, 12.4922], '#D72638', 'K', 'Kolosseum · Tag 2');
+  mk([41.9029, 12.4534], '#D72638', 'V', 'Vatikan · Tag 3');
+  mk([40.7488, 14.4855], '#D72638', 'P', 'Pompeji · Tag 4');
+
+  // Ausflugsziele (orange)
+  mk([40.6263, 14.3757], '#F4A261', 'S', 'Sorrent · Tag 5');
+  mk([40.6280, 14.4847], '#F4A261', 'Po', 'Positano · Tag 5');
+
+  // Route (Flug + Autofahrten)
+  L.polyline([[50.05, 8.57],[41.8, 12.25]], {
+    color:'#65768A', weight:2, dashArray:'4,6', opacity:.7
+  }).addTo(map).bindPopup('✈️ Flug Deutschland → Rom');
+
+  L.polyline([[41.9028,12.4964],[40.7488,14.4855],[40.8518,14.2681]],{
+    color:'#D72638', weight:4, opacity:.85
+  }).addTo(map).bindPopup('🚗 Tag 4: Rom → Pompeji → Neapel');
+
+  L.polyline([[40.8518,14.2681],[40.6263,14.3757],[40.6280,14.4847]],{
+    color:'#F4A261', weight:4, opacity:.85
+  }).addTo(map).bindPopup('🚗 Tag 5: Neapel → Sorrent → Positano');
+
+  L.polyline([[40.8518,14.2681],[41.8,12.25]],{
+    color:'#0E6FB8', weight:4, opacity:.85, dashArray:'6,4'
+  }).addTo(map).bindPopup('🚗 Tag 6: Neapel → Rom FCO');
+
+  map.fitBounds([[40.5,11.8],[42.0,15.0]], {padding:[20,20]});
+})();
+</script>
+
+</body>
+</html>
