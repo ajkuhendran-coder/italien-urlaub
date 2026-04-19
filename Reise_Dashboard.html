@@ -177,12 +177,14 @@
   <h2><span class="ico">🗺️</span> Route auf der Karte</h2>
   <div id="map"></div>
   <div class="legend">
-    <span class="chip"><span class="dot" style="background:#0E6FB8"></span>Übernachtung</span>
-    <span class="chip"><span class="dot" style="background:#D72638"></span>Sehenswürdigkeit</span>
-    <span class="chip"><span class="dot" style="background:#F4A261"></span>Ausflugsziel</span>
-    <span class="chip">🚗 Autofahrt</span>
-    <span class="chip">✈️ Flug</span>
+    <span class="chip"><span class="dot" style="background:#0E6FB8"></span>Tag 1–3 · Rom</span>
+    <span class="chip"><span class="dot" style="background:#D72638"></span>Tag 4 · Rom → Neapel</span>
+    <span class="chip"><span class="dot" style="background:#F4A261"></span>Tag 5 · Amalfiküste</span>
+    <span class="chip"><span class="dot" style="background:#2A9D8F"></span>Tag 6 · Rückreise</span>
   </div>
+  <p style="font-size:.8rem;color:var(--muted);margin:8px 2px 0">
+    💡 Tipp: Auf die Punkte tippen für Details. Auf dem iPhone mit zwei Fingern zoomen.
+  </p>
 </section>
 
 <!-- TAGE -->
@@ -537,48 +539,95 @@
   window.addEventListener('resize', refresh);
   window.addEventListener('orientationchange', function(){ setTimeout(refresh, 300); });
 
-  function mk(latlng, color, label, details){
-    const icon = L.divIcon({
-      className:'', iconSize:[28,28],
-      html:`<div style="width:28px;height:28px;background:${color};border:3px solid #fff;
-              border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,.3);
-              display:flex;align-items:center;justify-content:center;color:#fff;
-              font-weight:700;font-size:12px">${label}</div>`
+  // ------ Etappen mit echter Reise-Reihenfolge ------
+  // Stationen in der Reihenfolge der Reise:
+  //  1 Rom FCO (Ankunft)         Tag 1 – blau
+  //  2 Rom Zentrum (Hotel)       Tag 1–3 – blau (Hauptpunkt)
+  //  3 Kolosseum / Forum         Tag 2 – blau
+  //  4 Vatikan                   Tag 3 – blau
+  //  5 Pompeji                   Tag 4 – rot
+  //  6 Neapel (Hotel)            Tag 4–5 – rot (Hauptpunkt)
+  //  7 Sorrent                   Tag 5 – orange
+  //  8 Positano                  Tag 5 – orange
+  //  9 Rom FCO (Rückflug)        Tag 6 – grün
+
+  var stages = [
+    { n:1, ll:[41.8003,12.2389], c:'#0E6FB8', ico:'✈️', t:'Rom Fiumicino (FCO)',
+      sub:'Tag 1 · Ankunft mit Flugzeug' },
+    { n:2, ll:[41.9000,12.4950], c:'#0E6FB8', ico:'🏨', t:'Rom Zentrum · Hotel Marcantonio',
+      sub:'Tag 1–3 · 3 Übernachtungen', big:true },
+    { n:3, ll:[41.8902,12.4922], c:'#0E6FB8', ico:'🏛️', t:'Kolosseum & Forum Romanum',
+      sub:'Tag 2 · Antikes Rom' },
+    { n:4, ll:[41.9029,12.4534], c:'#0E6FB8', ico:'⛪', t:'Vatikan · Petersdom',
+      sub:'Tag 3 · Vatikanische Museen' },
+    { n:5, ll:[40.7488,14.4855], c:'#D72638', ico:'🏺', t:'Pompeji',
+      sub:'Tag 4 · Ausgrabungsstätte (Stopp unterwegs)' },
+    { n:6, ll:[40.8518,14.2681], c:'#D72638', ico:'🌋', t:'Neapel · Hotel San Paolo',
+      sub:'Tag 4–5 · 2 Übernachtungen', big:true },
+    { n:7, ll:[40.6263,14.3757], c:'#F4A261', ico:'🍋', t:'Sorrent',
+      sub:'Tag 5 · Altstadt & Zitronen' },
+    { n:8, ll:[40.6280,14.4847], c:'#F4A261', ico:'🏖️', t:'Positano (Amalfiküste)',
+      sub:'Tag 5 · Strand & Meer' },
+    { n:9, ll:[41.8003,12.2389], c:'#2A9D8F', ico:'✈️', t:'Rom Fiumicino (FCO)',
+      sub:'Tag 6 · Rückflug nach Hause' }
+  ];
+
+  // Marker zeichnen (große Haltepunkte für Übernachtungsorte)
+  stages.forEach(function(s){
+    var size = s.big ? 38 : 30;
+    var icon = L.divIcon({
+      className:'', iconSize:[size,size],
+      iconAnchor:[size/2,size/2],
+      html:
+        '<div style="width:'+size+'px;height:'+size+'px;background:'+s.c+';'+
+        'border:3px solid #fff;border-radius:50%;'+
+        'box-shadow:0 3px 10px rgba(0,0,0,.35);'+
+        'display:flex;align-items:center;justify-content:center;'+
+        'color:#fff;font-weight:800;font-size:'+(s.big?15:13)+'px">'+s.n+'</div>'
     });
-    return L.marker(latlng, {icon}).addTo(map).bindPopup(`<b>${details}</b>`);
+    L.marker(s.ll, {icon:icon, zIndexOffset: s.big?1000:0}).addTo(map)
+      .bindPopup('<div style="font-size:13px;line-height:1.4">'+
+        '<div style="font-size:18px;margin-bottom:2px">'+s.ico+' <b>'+s.n+'. '+s.t+'</b></div>'+
+        '<div style="color:#65768A">'+s.sub+'</div></div>');
+  });
+
+  // ------ Routen-Linien pro Tag ------
+  function route(points, color, dash, label){
+    L.polyline(points, {
+      color:color, weight:5, opacity:.85,
+      dashArray: dash||null, lineCap:'round', lineJoin:'round'
+    }).addTo(map).bindPopup('<b>'+label+'</b>');
   }
 
-  // Übernachtungen (blau)
-  mk([41.9028, 12.4964], '#0E6FB8', '1', 'Rom · Tag 1–3 (Hotel Marcantonio)');
-  mk([40.8518, 14.2681], '#0E6FB8', '2', 'Neapel · Tag 4–5 (Hotel San Paolo)');
+  // Tag 1: FCO → Rom Zentrum (per Zug, gestrichelt)
+  route([stages[0].ll, stages[1].ll], '#0E6FB8', '6,6',
+        '🚆 Tag 1: FCO → Rom Termini (Leonardo-Express)');
 
-  // Sehenswürdigkeiten (rot)
-  mk([41.8902, 12.4922], '#D72638', 'K', 'Kolosseum · Tag 2');
-  mk([41.9029, 12.4534], '#D72638', 'V', 'Vatikan · Tag 3');
-  mk([40.7488, 14.4855], '#D72638', 'P', 'Pompeji · Tag 4');
+  // Tag 2: Hotel → Kolosseum (Fußweg)
+  route([stages[1].ll, stages[2].ll], '#0E6FB8', '2,6',
+        '🚶 Tag 2: Hotel → Kolosseum (zu Fuß)');
 
-  // Ausflugsziele (orange)
-  mk([40.6263, 14.3757], '#F4A261', 'S', 'Sorrent · Tag 5');
-  mk([40.6280, 14.4847], '#F4A261', 'Po', 'Positano · Tag 5');
+  // Tag 3: Hotel → Vatikan
+  route([stages[1].ll, stages[3].ll], '#0E6FB8', '2,6',
+        '🚶 Tag 3: Hotel → Vatikan');
 
-  // Route (Flug + Autofahrten)
-  L.polyline([[50.05, 8.57],[41.8, 12.25]], {
-    color:'#65768A', weight:2, dashArray:'4,6', opacity:.7
-  }).addTo(map).bindPopup('✈️ Flug Deutschland → Rom');
+  // Tag 4: Rom Zentrum → Pompeji → Neapel (Auto, durchgezogen)
+  route([stages[1].ll, stages[4].ll, stages[5].ll], '#D72638', null,
+        '🚗 Tag 4: Rom → Pompeji → Neapel (ca. 270 km)');
 
-  L.polyline([[41.9028,12.4964],[40.7488,14.4855],[40.8518,14.2681]],{
-    color:'#D72638', weight:4, opacity:.85
-  }).addTo(map).bindPopup('🚗 Tag 4: Rom → Pompeji → Neapel');
+  // Tag 5: Neapel → Sorrent → Positano → zurück nach Neapel
+  route([stages[5].ll, stages[6].ll, stages[7].ll, stages[5].ll], '#F4A261', null,
+        '🚗 Tag 5: Neapel → Sorrent → Positano → Neapel (ca. 110 km)');
 
-  L.polyline([[40.8518,14.2681],[40.6263,14.3757],[40.6280,14.4847]],{
-    color:'#F4A261', weight:4, opacity:.85
-  }).addTo(map).bindPopup('🚗 Tag 5: Neapel → Sorrent → Positano');
+  // Tag 6: Neapel → Rom FCO (Rückfahrt + Heimflug)
+  route([stages[5].ll, stages[8].ll], '#2A9D8F', null,
+        '🚗 Tag 6: Neapel → Rom FCO (ca. 220 km)');
 
-  L.polyline([[40.8518,14.2681],[41.8,12.25]],{
-    color:'#0E6FB8', weight:4, opacity:.85, dashArray:'6,4'
-  }).addTo(map).bindPopup('🚗 Tag 6: Neapel → Rom FCO');
-
-  map.fitBounds([[40.5,11.8],[42.0,15.0]], {padding:[20,20]});
+  // Karte genau auf alle Stationen zentrieren
+  var group = L.featureGroup(
+    stages.map(function(s){ return L.marker(s.ll); })
+  );
+  map.fitBounds(group.getBounds().pad(0.15));
 })();
 </script>
 
