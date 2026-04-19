@@ -70,8 +70,10 @@
   }
 
   /* ---------- MAP ---------- */
-  #map{height:320px;border-radius:16px;overflow:hidden;
-    border:1px solid var(--border);box-shadow:0 6px 18px rgba(0,0,0,.06);z-index:1}
+  #map{height:340px;width:100%;border-radius:16px;overflow:hidden;
+    border:1px solid var(--border);box-shadow:0 6px 18px rgba(0,0,0,.06);z-index:1;
+    background:#e8eef4;touch-action:pan-y pinch-zoom}
+  .leaflet-container{background:#e8eef4 !important;font-family:inherit !important}
   .legend{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
   .chip{display:inline-flex;align-items:center;gap:6px;background:#fff;
     border:1px solid var(--border);padding:5px 10px;border-radius:999px;
@@ -497,12 +499,43 @@
     return;
   }
 
-  var map = L.map('map', {scrollWheelZoom:false, tap:true})
-    .setView([41.3, 13.8], 7);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 18,
-    attribution: '© OpenStreetMap'
-  }).addTo(map);
+  var map = L.map('map', {
+      scrollWheelZoom:false,
+      zoomControl:true,
+      dragging:true,
+      touchZoom:true,
+      doubleClickZoom:true,
+      preferCanvas:true
+    }).setView([41.3, 13.8], 7);
+
+  // Primäre Tile-Quelle (CartoDB – auf iOS zuverlässig, HTTPS, selten blockiert)
+  var primary = L.tileLayer(
+    'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+    {
+      subdomains:'abcd', maxZoom:19,
+      attribution:'© OpenStreetMap © CARTO'
+    }
+  ).addTo(map);
+
+  // Fallback falls Primary nicht lädt
+  var tileErrors = 0;
+  primary.on('tileerror', function(){
+    tileErrors++;
+    if(tileErrors > 3){
+      primary.remove();
+      L.tileLayer('https://tile.openstreetmap.de/{z}/{x}/{y}.png', {
+        maxZoom:18, attribution:'© OpenStreetMap DE'
+      }).addTo(map);
+    }
+  });
+
+  // iOS-Fix: Karte auf volle Größe refreshen wenn Layout steht
+  function refresh(){ try { map.invalidateSize(true); } catch(e){} }
+  setTimeout(refresh, 200);
+  setTimeout(refresh, 800);
+  window.addEventListener('load', refresh);
+  window.addEventListener('resize', refresh);
+  window.addEventListener('orientationchange', function(){ setTimeout(refresh, 300); });
 
   function mk(latlng, color, label, details){
     const icon = L.divIcon({
