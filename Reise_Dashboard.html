@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#0E6FB8">
-<title>Italien-Urlaub · 25.–30. Mai 2026</title>
+<title>Italien-Urlaub · 25.–31. Mai 2026</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
 <style>
   :root{
@@ -76,9 +76,16 @@
   .leaflet-container{background:#e8eef4 !important;font-family:inherit !important}
   .legend{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
   .chip{display:inline-flex;align-items:center;gap:6px;background:#fff;
-    border:1px solid var(--border);padding:5px 10px;border-radius:999px;
-    font-size:.78rem;font-weight:600}
-  .chip .dot{width:10px;height:10px;border-radius:50%}
+    border:1px solid var(--border);padding:6px 12px;border-radius:999px;
+    font-size:.78rem;font-weight:600;cursor:pointer;user-select:none;
+    transition:transform .15s,box-shadow .15s,background .15s;
+    -webkit-tap-highlight-color:transparent}
+  .chip:hover{box-shadow:0 2px 8px rgba(0,0,0,.1)}
+  .chip:active{transform:scale(.96)}
+  .chip.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .chip.active .dot{box-shadow:0 0 0 2px rgba(255,255,255,.5)}
+  .chip .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+  .chip.reset{background:var(--sea);border-color:#c8dbec;color:var(--primary)}
 
   /* ---------- TIMELINE ---------- */
   .days{display:flex;flex-direction:column;gap:12px}
@@ -158,7 +165,7 @@
     &nbsp;Italia · Famiglia</div>
   <h1>Italien-Urlaub 2026</h1>
   <p class="sub">Rom &amp; Neapel · entspannter Familienplan</p>
-  <div class="dates">📅 Mo 25.05. – Sa 30.05.2026</div>
+  <div class="dates">📅 Mo 25.05. – So 31.05.2026</div>
   <div class="persons">👩 1 Erwachsene · 👧 11 J · 👦 7 J</div>
 </header>
 
@@ -166,24 +173,26 @@
 
 <!-- STATS -->
 <div class="stats">
-  <div class="stat"><div class="v">6</div><div class="l">Tage</div></div>
-  <div class="stat"><div class="v">5</div><div class="l">Nächte</div></div>
+  <div class="stat"><div class="v">7</div><div class="l">Tage</div></div>
+  <div class="stat"><div class="v">6</div><div class="l">Nächte</div></div>
   <div class="stat"><div class="v">2</div><div class="l">Städte</div></div>
-  <div class="stat"><div class="v">~1.6k€</div><div class="l">Budget</div></div>
+  <div class="stat"><div class="v">~1.9k€</div><div class="l">Budget</div></div>
 </div>
 
 <!-- MAP -->
 <section>
   <h2><span class="ico">🗺️</span> Route auf der Karte</h2>
   <div id="map"></div>
-  <div class="legend">
-    <span class="chip"><span class="dot" style="background:#0E6FB8"></span>Tag 1–3 · Rom</span>
-    <span class="chip"><span class="dot" style="background:#D72638"></span>Tag 4 · Rom → Neapel</span>
-    <span class="chip"><span class="dot" style="background:#F4A261"></span>Tag 5 · Amalfiküste</span>
-    <span class="chip"><span class="dot" style="background:#2A9D8F"></span>Tag 6 · Rückreise</span>
+  <div class="legend" id="legend">
+    <span class="chip" data-day="1"><span class="dot" style="background:#0E6FB8"></span>Tag 1–3 · Rom</span>
+    <span class="chip" data-day="4"><span class="dot" style="background:#D72638"></span>Tag 4 · Rom → Neapel</span>
+    <span class="chip" data-day="5"><span class="dot" style="background:#F4A261"></span>Tag 5 · Amalfiküste</span>
+    <span class="chip" data-day="6"><span class="dot" style="background:#9B5DE5"></span>Tag 6 · Vesuv</span>
+    <span class="chip" data-day="7"><span class="dot" style="background:#2A9D8F"></span>Tag 7 · Rückreise</span>
+    <span class="chip reset" data-day="all">🗺️ Alles zeigen</span>
   </div>
   <p style="font-size:.8rem;color:var(--muted);margin:8px 2px 0">
-    💡 Tipp: Auf die Punkte tippen für Details. Auf dem iPhone mit zwei Fingern zoomen.
+    💡 Tipp: Auf eine Etappe oben tippen, um auf der Karte dorthin zu zoomen.
   </p>
 </section>
 
@@ -340,6 +349,41 @@
         <div class="badge"><div class="n">6</div><div class="d">SA</div></div>
         <div class="info">
           <div class="date">30. Mai 2026</div>
+          <div class="title">Vesuv &amp; Entspannung</div>
+          <div class="loc">🌋 Vulkan-Ausflug + Pool-Nachmittag</div>
+        </div>
+        <span class="arrow">›</span>
+      </summary>
+      <div class="content">
+        <div class="block"><div class="time">08:30</div><div class="txt">
+          <b>Frühstück, früh los</b>
+          <div class="d">Wasserflasche, Sonnenhut, feste Schuhe – der Aufstieg ist sonnig</div></div></div>
+        <div class="block"><div class="time">09:00</div><div class="txt">
+          <b>Fahrt Neapel → Vesuv-Parkplatz</b>
+          <div class="d">ca. 30 km, 50 Min. · Parkplatz auf ~1.000 m Höhe (6 €/Tag)</div></div></div>
+        <div class="block"><div class="time">10:00</div><div class="txt">
+          <b>🥾 Aufstieg zum Krater</b>
+          <div class="d">Eintritt Vesuv-Nationalpark 13 €/Erw · Kinder unter 8 frei · ca. 30 Min. bergauf auf Schotterweg. Oben am Kraterrand entlang (1 km). Atemberaubender Blick auf Golf von Neapel!</div></div></div>
+        <div class="block"><div class="time">12:30</div><div class="txt">
+          <b>Abstieg &amp; Mittagessen</b>
+          <div class="d">Traditionelle <i>Trattoria</i> in Ercolano (Herculaneum) mit Vesuv-Blick</div></div></div>
+        <div class="block"><div class="time">14:30</div><div class="txt">
+          <b>🏺 Optional: Herculaneum (kurz)</b>
+          <div class="d">Kleiner, besser erhalten als Pompeji, 13 € · Kinder frei · nur 1,5 h · oder gleich weiter zum Hotel</div></div></div>
+        <div class="block"><div class="time">16:00</div><div class="txt">
+          <b>🏊 Hotel-Pool &amp; Erholung</b>
+          <div class="d">Das Hotel San Paolo hat einen Pool – nach dem Vulkan genau richtig</div></div></div>
+        <div class="block"><div class="time">19:30</div><div class="txt">
+          <b>Letzter Abend in Neapel</b>
+          <div class="d">Lieblings-Pizzeria nochmal · Sonnenuntergang am Lungomare mit Vesuv-Blick (den ihr heute bestiegen habt!)</div></div></div>
+      </div>
+    </details>
+
+    <details class="day">
+      <summary>
+        <div class="badge"><div class="n">7</div><div class="d">SO</div></div>
+        <div class="info">
+          <div class="date">31. Mai 2026</div>
           <div class="title">Rückreise</div>
           <div class="loc">🚗 Neapel → ✈️ Heimflug</div>
         </div>
@@ -379,7 +423,7 @@
       </div>
     </div>
     <div class="card">
-      <div class="kicker">Neapel · 2 Nächte</div>
+      <div class="kicker">Neapel · 3 Nächte</div>
       <h3>Hotel San Paolo</h3>
       <div class="addr">mit Privatparkplatz &amp; Pool</div>
       <div class="price">ca. 120 €/Nacht · 4★</div>
@@ -417,10 +461,10 @@
       </div>
     </div>
     <div class="card">
-      <div class="kicker">Leihwagen 3 Tage</div>
+      <div class="kicker">Leihwagen 4 Tage</div>
       <h3>Sunnycars Kompaktklasse</h3>
       <div class="addr">Abholung Termini · Rückgabe FCO</div>
-      <div class="price">ca. 125 € · inkl. Vollkasko</div>
+      <div class="price">ca. 165 € · inkl. Vollkasko</div>
       <div class="tags">
         <span class="tag ok">Voll versichert</span>
         <span class="tag">Kindersitz ~5 €/Tag</span>
@@ -434,22 +478,22 @@
   <h2><span class="ico">💰</span> Budget-Übersicht</h2>
   <div class="card">
     <div class="budget-row"><span class="lbl">Flüge</span>
-      <span class="bar"><span style="width:20%"></span></span><span class="amt">330 €</span></div>
+      <span class="bar"><span style="width:18%"></span></span><span class="amt">330 €</span></div>
     <div class="budget-row"><span class="lbl">Hotel Rom (3 N)</span>
-      <span class="bar"><span style="width:27%"></span></span><span class="amt">450 €</span></div>
-    <div class="budget-row"><span class="lbl">Hotel Neapel (2 N)</span>
-      <span class="bar"><span style="width:14%"></span></span><span class="amt">240 €</span></div>
-    <div class="budget-row"><span class="lbl">Leihwagen</span>
-      <span class="bar"><span style="width:7%"></span></span><span class="amt">125 €</span></div>
-    <div class="budget-row"><span class="lbl">Tank + Maut</span>
-      <span class="bar"><span style="width:6%"></span></span><span class="amt">105 €</span></div>
-    <div class="budget-row"><span class="lbl">Eintritte</span>
-      <span class="bar"><span style="width:5%"></span></span><span class="amt">80 €</span></div>
-    <div class="budget-row"><span class="lbl">Verpflegung</span>
-      <span class="bar"><span style="width:13%"></span></span><span class="amt">220 €</span></div>
+      <span class="bar"><span style="width:24%"></span></span><span class="amt">450 €</span></div>
+    <div class="budget-row"><span class="lbl">Hotel Neapel (3 N)</span>
+      <span class="bar"><span style="width:19%"></span></span><span class="amt">360 €</span></div>
+    <div class="budget-row"><span class="lbl">Leihwagen (4 Tage)</span>
+      <span class="bar"><span style="width:9%"></span></span><span class="amt">165 €</span></div>
+    <div class="budget-row"><span class="lbl">Tank + Maut + Vesuv-Parkplatz</span>
+      <span class="bar"><span style="width:7%"></span></span><span class="amt">130 €</span></div>
+    <div class="budget-row"><span class="lbl">Eintritte inkl. Vesuv</span>
+      <span class="bar"><span style="width:6%"></span></span><span class="amt">110 €</span></div>
+    <div class="budget-row"><span class="lbl">Verpflegung (7 Tage)</span>
+      <span class="bar"><span style="width:14%"></span></span><span class="amt">260 €</span></div>
     <div class="budget-row"><span class="lbl">Extras (Eis, Taxi, Souvenirs)</span>
-      <span class="bar"><span style="width:8%"></span></span><span class="amt">114 €</span></div>
-    <div class="total"><span>Gesamt Familie</span><span class="v">≈ 1.664 €</span></div>
+      <span class="bar"><span style="width:6%"></span></span><span class="amt">120 €</span></div>
+    <div class="total"><span>Gesamt Familie</span><span class="v">≈ 1.925 €</span></div>
   </div>
 </section>
 
@@ -568,8 +612,12 @@
       sub:'Tag 5 · Altstadt & Zitronen' },
     { n:8, ll:[40.6280,14.4847], c:'#F4A261', ico:'🏖️', t:'Positano (Amalfiküste)',
       sub:'Tag 5 · Strand & Meer' },
-    { n:9, ll:[41.8003,12.2389], c:'#2A9D8F', ico:'✈️', t:'Rom Fiumicino (FCO)',
-      sub:'Tag 6 · Rückflug nach Hause' }
+    { n:9, ll:[40.8220,14.4280], c:'#9B5DE5', ico:'🌋', t:'Vesuv',
+      sub:'Tag 6 · Kraterwanderung, 1.281 m' },
+    { n:10, ll:[40.8058,14.3487], c:'#9B5DE5', ico:'🏺', t:'Herculaneum (optional)',
+      sub:'Tag 6 · Mittagspause am Fuße des Vesuv' },
+    { n:11, ll:[41.8003,12.2389], c:'#2A9D8F', ico:'✈️', t:'Rom Fiumicino (FCO)',
+      sub:'Tag 7 · Rückflug nach Hause' }
   ];
 
   // Marker zeichnen (große Haltepunkte für Übernachtungsorte)
@@ -585,8 +633,8 @@
         'display:flex;align-items:center;justify-content:center;'+
         'color:#fff;font-weight:800;font-size:'+(s.big?15:13)+'px">'+s.n+'</div>'
     });
-    L.marker(s.ll, {icon:icon, zIndexOffset: s.big?1000:0}).addTo(map)
-      .bindPopup('<div style="font-size:13px;line-height:1.4">'+
+    s.marker = L.marker(s.ll, {icon:icon, zIndexOffset: s.big?1000:0}).addTo(map);
+    s.marker.bindPopup('<div style="font-size:13px;line-height:1.4">'+
         '<div style="font-size:18px;margin-bottom:2px">'+s.ico+' <b>'+s.n+'. '+s.t+'</b></div>'+
         '<div style="color:#65768A">'+s.sub+'</div></div>');
   });
@@ -619,15 +667,70 @@
   route([stages[5].ll, stages[6].ll, stages[7].ll, stages[5].ll], '#F4A261', null,
         '🚗 Tag 5: Neapel → Sorrent → Positano → Neapel (ca. 110 km)');
 
-  // Tag 6: Neapel → Rom FCO (Rückfahrt + Heimflug)
-  route([stages[5].ll, stages[8].ll], '#2A9D8F', null,
-        '🚗 Tag 6: Neapel → Rom FCO (ca. 220 km)');
+  // Tag 6: Neapel → Vesuv → Herculaneum → zurück nach Neapel
+  route([stages[5].ll, stages[8].ll, stages[9].ll, stages[5].ll], '#9B5DE5', null,
+        '🌋 Tag 6: Neapel → Vesuv → Herculaneum → Neapel (ca. 60 km)');
+
+  // Tag 7: Neapel → Rom FCO (Rückfahrt + Heimflug)
+  route([stages[5].ll, stages[10].ll], '#2A9D8F', null,
+        '🚗 Tag 7: Neapel → Rom FCO (ca. 220 km)');
 
   // Karte genau auf alle Stationen zentrieren
-  var group = L.featureGroup(
-    stages.map(function(s){ return L.marker(s.ll); })
-  );
-  map.fitBounds(group.getBounds().pad(0.15));
+  var allBounds = L.latLngBounds(stages.map(function(s){ return s.ll; }));
+  map.fitBounds(allBounds.pad(0.15));
+
+  // ------ Legende klickbar ------
+  // Welche stages[-index] gehören zu welchem Tag:
+  //   1 = FCO-Ankunft, 2 = Rom-Hotel, 3 = Kolosseum, 4 = Vatikan,
+  //   5 = Pompeji,     6 = Neapel-Hotel, 7 = Sorrent, 8 = Positano,
+  //   9 = Vesuv,      10 = Herculaneum,  11 = FCO-Rückflug
+  var dayGroups = {
+    '1': { stages:[1,2,3,4], highlight:2, title:'Rom (Tag 1–3)' },
+    '4': { stages:[2,5,6],   highlight:5, title:'Rom → Pompeji → Neapel' },
+    '5': { stages:[6,7,8],   highlight:8, title:'Neapel → Sorrent → Positano' },
+    '6': { stages:[6,9,10],  highlight:9, title:'Vesuv & Herculaneum' },
+    '7': { stages:[6,11],    highlight:11, title:'Neapel → Rom FCO' }
+  };
+
+  function stageByN(n){
+    for(var i=0;i<stages.length;i++){ if(stages[i].n===n) return stages[i]; }
+    return null;
+  }
+
+  var chips = document.querySelectorAll('#legend .chip');
+  chips.forEach(function(chip){
+    chip.addEventListener('click', function(){
+      var day = chip.getAttribute('data-day');
+
+      // Active-Style zurücksetzen
+      chips.forEach(function(c){ c.classList.remove('active'); });
+      chip.classList.add('active');
+
+      // Sanft zur Karte scrollen (nur wenn Chip gerade nicht sichtbar)
+      document.getElementById('map').scrollIntoView({behavior:'smooth', block:'center'});
+
+      if(day === 'all'){
+        map.flyToBounds(allBounds.pad(0.15), {duration:0.7});
+        setTimeout(function(){ map.closePopup(); }, 100);
+        return;
+      }
+
+      var grp = dayGroups[day];
+      if(!grp) return;
+      var points = grp.stages.map(stageByN).filter(Boolean);
+      if(!points.length) return;
+
+      var b = L.latLngBounds(points.map(function(s){ return s.ll; }));
+      // Kleinere Etappen bekommen mehr Padding für einen schönen Ausschnitt
+      map.flyToBounds(b.pad(0.35), {duration:0.7, maxZoom:12});
+
+      // Popup des wichtigsten Punkts öffnen
+      var hl = stageByN(grp.highlight);
+      if(hl && hl.marker){
+        setTimeout(function(){ hl.marker.openPopup(); }, 800);
+      }
+    });
+  });
 })();
 </script>
 
