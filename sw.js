@@ -1,7 +1,7 @@
 // Service Worker für Italien-Urlaub Dashboard
 // Macht die Seite offline-fähig – gerade im Urlaub mit wackeligem Netz Gold wert.
 
-const CACHE_NAME = 'italien-urlaub-v3';
+const CACHE_NAME = 'italien-urlaub-v4';
 const ASSETS = [
   './',
   './index.html',

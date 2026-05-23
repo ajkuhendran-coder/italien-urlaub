@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#0E6FB8">
-<title>Italien-Urlaub · 25.–31. Mai 2026</title>
+<title>Italien-Urlaub · 24.–30. Mai 2026</title>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -238,8 +238,8 @@
   <div class="flag"><span class="g"></span><span class="w"></span><span class="r"></span>
     &nbsp;Italia · Famiglia</div>
   <h1>Italien-Urlaub 2026</h1>
-  <p class="sub">Rom &amp; Neapel · entspannter Familienplan</p>
-  <div class="dates">📅 Mo 25.05. – So 31.05.2026</div>
+  <p class="sub">Rom · entspannter Familienplan</p>
+  <div class="dates">📅 So 24.05. – Sa 30.05.2026</div>
   <div class="persons">👩 1 Erwachsene · 👧 11 J · 👦 7 J</div>
 </header>
 
@@ -249,8 +249,8 @@
 <div class="stats">
   <div class="stat"><div class="v">7</div><div class="l">Tage</div></div>
   <div class="stat"><div class="v">6</div><div class="l">Nächte</div></div>
-  <div class="stat"><div class="v">2</div><div class="l">Städte</div></div>
-  <div class="stat"><div class="v">~1.9k€</div><div class="l">Budget</div></div>
+  <div class="stat"><div class="v">1</div><div class="l">Basis-Stadt</div></div>
+  <div class="stat"><div class="v">2</div><div class="l">Tagestouren</div></div>
 </div>
 
 <!-- COUNTDOWN -->
@@ -270,8 +270,9 @@
 <section>
   <h2><span class="ico">☀️</span> Wetter vor Ort</h2>
   <div class="weather" id="weather">
-    <div class="wx-city" data-city="Rom"        data-lat="41.9028" data-lon="12.4964"></div>
-    <div class="wx-city" data-city="Neapel"     data-lat="40.8518" data-lon="14.2681"></div>
+    <div class="wx-city" data-city="Rom"     data-lat="41.9028" data-lon="12.4964"></div>
+    <div class="wx-city" data-city="Pisa"    data-lat="43.7229" data-lon="10.3966"></div>
+    <div class="wx-city" data-city="Pompeji" data-lat="40.7488" data-lon="14.4855"></div>
   </div>
 </section>
 
@@ -280,11 +281,13 @@
   <h2><span class="ico">🗺️</span> Route auf der Karte</h2>
   <div id="map"></div>
   <div class="legend" id="legend">
-    <span class="chip" data-day="1"><span class="dot" style="background:#0E6FB8"></span>Tag 1–3 · Rom</span>
-    <span class="chip" data-day="4"><span class="dot" style="background:#D72638"></span>Tag 4 · Rom → Neapel</span>
-    <span class="chip" data-day="5"><span class="dot" style="background:#F4A261"></span>Tag 5 · Amalfiküste</span>
-    <span class="chip" data-day="6"><span class="dot" style="background:#9B5DE5"></span>Tag 6 · Vesuv</span>
-    <span class="chip" data-day="7"><span class="dot" style="background:#2A9D8F"></span>Tag 7 · Rückreise</span>
+    <span class="chip" data-day="1"><span class="dot" style="background:#0E6FB8"></span>Tag 1 · Ankunft Rom</span>
+    <span class="chip" data-day="2"><span class="dot" style="background:#0E6FB8"></span>Tag 2 · Kolosseum</span>
+    <span class="chip" data-day="3"><span class="dot" style="background:#0E6FB8"></span>Tag 3 · Vatikan</span>
+    <span class="chip" data-day="4"><span class="dot" style="background:#F4A261"></span>Tag 4 · Pisa</span>
+    <span class="chip" data-day="5"><span class="dot" style="background:#9B5DE5"></span>Tag 5 · Pompeji &amp; Vesuv</span>
+    <span class="chip" data-day="6"><span class="dot" style="background:#0E6FB8"></span>Tag 6 · Rom-Sights</span>
+    <span class="chip" data-day="7"><span class="dot" style="background:#2A9D8F"></span>Tag 7 · Rückflug</span>
     <span class="chip reset" data-day="all">🗺️ Alles zeigen</span>
   </div>
   <p style="font-size:.8rem;color:var(--muted);margin:8px 2px 0">
@@ -299,75 +302,88 @@
 
     <details class="day" open>
       <summary>
-        <div class="badge"><div class="n">1</div><div class="d">MO</div></div>
+        <div class="badge"><div class="n">1</div><div class="d">SO</div></div>
         <div class="info">
-          <div class="date">25. Mai 2026</div>
+          <div class="date">24. Mai 2026</div>
           <div class="title">Anreise nach Rom</div>
-          <div class="loc">✈️ Deutschland → 🏛️ Rom</div>
+          <div class="loc">✈️ Frankfurt → 🏛️ Rom</div>
         </div>
         <span class="arrow">›</span>
       </summary>
       <div class="content">
-        <div class="block"><div class="time">Vorm.</div><div class="txt">
-          <b>Flug nach Rom Fiumicino (FCO)</b>
-          <div class="d">Leonardo-Express zum Bahnhof Termini (32 Min, 14 €)</div></div></div>
-        <div class="block"><div class="time">Mittag</div><div class="txt">
-          <b>Hotel Check-in</b><div class="d">Koffer ablegen, kurz ausruhen</div></div></div>
-        <div class="block"><div class="time">13:30</div><div class="txt">
-          <b>Erster Bummel</b><div class="d">Piazza Navona · Pantheon · Eis bei Frigidarium</div></div></div>
+        <div class="block"><div class="time">11:30</div><div class="txt">
+          <b>Am Flughafen Frankfurt</b>
+          <div class="d">Spätestens 2 h vor Abflug · Online Check-in vorher erledigt · Reisepässe griffbereit</div></div></div>
+        <div class="block"><div class="time">14:00</div><div class="txt">
+          <b>Abflug Condor DE4419</b>
+          <div class="d">FRA → FCO · 1h50 Flugzeit · Snacks für die Kinder einpacken</div></div></div>
+        <div class="block"><div class="time">15:50</div><div class="txt">
+          <b>Ankunft Rom Fiumicino</b>
+          <div class="d">Gepäck holen, Leonardo-Express oder Taxi (~50 € fixer Tarif ins Zentrum)</div></div></div>
         <div class="block"><div class="time">17:00</div><div class="txt">
-          <b>Spanische Treppe</b><div class="d">Bei Sonnenuntergang – Instagram-Moment!</div></div></div>
-        <div class="block"><div class="time">19:00</div><div class="txt">
-          <b>Pizza zum Abend</b><div class="d">Kinderfreundliche Pizzeria, dann zurück ins Hotel</div></div></div>
+          <b>🏠 Apartment Check-in</b>
+          <div class="d">Suite-Apartment · Via Vittorino da Feltre 81 · ankommen, auspacken, kurz durchatmen</div></div></div>
+        <div class="block"><div class="time">18:30</div><div class="txt">
+          <b>Erster Spaziergang</b>
+          <div class="d">Lateran / San Giovanni in Laterano gleich um die Ecke · ruhiges Reinkommen in Rom</div></div></div>
+        <div class="block"><div class="time">20:00</div><div class="txt">
+          <b>🍕 Pizza in der Nachbarschaft</b>
+          <div class="d">Kinderfreundliche Pizzeria · früh ins Bett – morgen ist Pfingstmontag und Kolosseum-Tag</div></div></div>
       </div>
     </details>
 
     <details class="day">
       <summary>
-        <div class="badge"><div class="n">2</div><div class="d">DI</div></div>
+        <div class="badge"><div class="n">2</div><div class="d">MO</div></div>
         <div class="info">
-          <div class="date">26. Mai 2026</div>
+          <div class="date">25. Mai 2026 · Pfingstmontag</div>
           <div class="title">Antikes Rom</div>
           <div class="loc">🏛️ Kolosseum · Forum · Palatin</div>
         </div>
         <span class="arrow">›</span>
       </summary>
       <div class="content">
+        <div class="block"><div class="time">⚠️</div><div class="txt">
+          <b>Hinweis Pfingstmontag</b>
+          <div class="d">In Italien <b>kein</b> Feiertag (anders als in Deutschland) – Sehenswürdigkeiten sind regulär offen. Vatikan ist trotzdem heute besonders voll → wir gehen erst <b>Dienstag</b>.</div></div></div>
         <div class="block"><div class="time">09:00</div><div class="txt">
           <b>Kolosseum + Forum + Palatin</b>
-          <div class="d">Kombiticket 18 € · Kinderführung auf Deutsch empfohlen (GetYourGuide ~25 €) · Zeitslot online buchen!</div></div></div>
+          <div class="d">Kombiticket 18 € · Kinder unter 18 frei · Zeitslot <b>unbedingt online vorab</b> buchen! · Familien-Führung auf Deutsch über GetYourGuide ~25 €</div></div></div>
         <div class="block"><div class="time">12:30</div><div class="txt">
           <b>Pizza al Taglio Mittagessen</b>
           <div class="d">Nach Gewicht – Kinder lieben es!</div></div></div>
         <div class="block"><div class="time">14:00</div><div class="txt">
-          <b>🌿 Siesta im Hotel</b>
+          <b>🌿 Siesta im Apartment</b>
           <div class="d">Die Pause ist Pflicht – sie rettet den Tag</div></div></div>
         <div class="block"><div class="time">16:30</div><div class="txt">
           <b>Spaziergang Trastevere</b>
-          <div class="d">Urige Gassen, Flohmarkt-Flair, Straßenmusiker. Am Tiberufer entlangschlendern.</div></div></div>
+          <div class="d">Urige Gassen, Flohmarkt-Flair, Straßenmusiker · am Tiberufer entlangschlendern</div></div></div>
         <div class="block"><div class="time">19:00</div><div class="txt">
           <b>Dinner in Trastevere</b>
-          <div class="d">Kinderfreundliche Trattoria. Früh essen = keine Wartezeit.</div></div></div>
+          <div class="d">Kinderfreundliche Trattoria · früh essen = keine Wartezeit</div></div></div>
       </div>
     </details>
 
     <details class="day">
       <summary>
-        <div class="badge"><div class="n">3</div><div class="d">MI</div></div>
+        <div class="badge"><div class="n">3</div><div class="d">DI</div></div>
         <div class="info">
-          <div class="date">27. Mai 2026</div>
-          <div class="title">Vatikan &amp; Rom-Klassiker</div>
-          <div class="loc">⛪ Vatikan · Spanische Treppe · Trevi</div>
+          <div class="date">26. Mai 2026</div>
+          <div class="title">Vatikan</div>
+          <div class="loc">⛪ Museen · Sixtinische Kapelle · Petersdom</div>
         </div>
         <span class="arrow">›</span>
       </summary>
       <div class="content">
-        <div class="block"><div class="time">08:30</div><div class="txt">
-          <b>⚠️ Vatikan Dresscode</b>
+        <div class="block"><div class="time">⚠️</div><div class="txt">
+          <b>Vatikan Dresscode</b>
           <div class="d"><b>Schultern UND Knie bedeckt</b> – für alle, auch Kinder! Tuch zum Überziehen einpacken, sonst kein Eintritt.</div></div></div>
+        <div class="block"><div class="time">08:30</div><div class="txt">
+          <b>Früh hin – vor der Hauptmasse</b>
+          <div class="d">Metro Linie A bis San Pietro · Wasser + Snacks dabei</div></div></div>
         <div class="block"><div class="time">09:00</div><div class="txt">
-          <b>Vatikanische Museen</b>
-          <div class="d">17 € / 8 € · Familien-Audiotour mit Rätseln (7 €) · online mit Zeitslot buchen!</div></div></div>
+          <b>Vatikanische Museen + Sixtinische Kapelle</b>
+          <div class="d">17 € / 8 € · Familien-Audiotour mit Rätseln (7 €) · <b>online mit Zeitslot</b> buchen!</div></div></div>
         <div class="block"><div class="time">11:30</div><div class="txt">
           <b>Petersplatz &amp; Petersdom</b>
           <div class="d">Kostenfrei · max. 45 Min · Kuppelaufstieg nur bei Lust (320 Stufen)</div></div></div>
@@ -375,146 +391,162 @@
           <b>Mittagessen im Borgo Pio</b>
           <div class="d">Ruhige Gassen abseits der Ströme</div></div></div>
         <div class="block"><div class="time">14:30</div><div class="txt">
-          <b>🌿 Siesta im Hotel (wichtig!)</b>
+          <b>🌿 Siesta im Apartment</b>
           <div class="d">Nach Vatikan ist bei den Kindern kein Strom mehr. 1,5 h Pause ist Pflicht.</div></div></div>
         <div class="block"><div class="time">17:00</div><div class="txt">
           <b>🎈 Villa Borghese – Belohnung</b>
           <div class="d">Tretboote auf dem Teich, Spielplatz, Pony-Kutsche · oder Explora Kindermuseum (8–10 €)</div></div></div>
-        <div class="block"><div class="time">18:30</div><div class="txt">
-          <b>Spanische Treppe</b>
-          <div class="d">Nur 5 Min. Fußweg von Villa Borghese – Sonnenuntergangs-Foto-Moment ✨</div></div></div>
-        <div class="block"><div class="time">19:15</div><div class="txt">
-          <b>🪙 Trevi-Brunnen</b>
-          <div class="d">10 Min. Fußweg. Münze mit <b>rechter Hand über linke Schulter</b> werfen – du kommst sicher wieder nach Rom!</div></div></div>
-        <div class="block"><div class="time">19:45</div><div class="txt">
-          <b>🍦 Gelato bei Giolitti</b>
-          <div class="d">Wahrscheinlich das beste Eis Roms, 2 Min. vom Trevi. Dann Taxi zum Abendessen nahe Hotel.</div></div></div>
+        <div class="block"><div class="time">19:30</div><div class="txt">
+          <b>Dinner in der Nachbarschaft</b>
+          <div class="d">Früh ins Bett – morgen ist Pisa-Tag, Aufstehen früh!</div></div></div>
       </div>
     </details>
 
     <details class="day">
       <summary>
-        <div class="badge"><div class="n">4</div><div class="d">DO</div></div>
+        <div class="badge"><div class="n">4</div><div class="d">MI</div></div>
+        <div class="info">
+          <div class="date">27. Mai 2026</div>
+          <div class="title">Tagesausflug Pisa</div>
+          <div class="loc">🗼 Schiefer Turm · Piazza dei Miracoli</div>
+        </div>
+        <span class="arrow">›</span>
+      </summary>
+      <div class="content">
+        <div class="block"><div class="time">⚠️</div><div class="txt">
+          <b>Bahnticket vorher buchen</b>
+          <div class="d">Frecciarossa Rom Termini → Pisa Centrale · ca. 3 h pro Strecke · früh buchen = günstiger (ab ~40 €/Erw. h&amp;z, Kinder oft frei oder stark vergünstigt)</div></div></div>
+        <div class="block"><div class="time">06:30</div><div class="txt">
+          <b>Aufstehen, schneller Espresso</b>
+          <div class="d">Apartment → Termini per Taxi/Metro (~20 Min)</div></div></div>
+        <div class="block"><div class="time">07:35</div><div class="txt">
+          <b>🚄 Frecciarossa nach Pisa</b>
+          <div class="d">Frühstück + Snacks im Zug · ankommen Pisa Centrale ~10:30 (Verbindung mit ggf. einem Umstieg in Florenz – beim Buchen prüfen)</div></div></div>
+        <div class="block"><div class="time">10:45</div><div class="txt">
+          <b>🚌 Bus LAM Rossa zum Turm</b>
+          <div class="d">10 Min vom Bahnhof · oder 25 Min zu Fuß durch die Altstadt</div></div></div>
+        <div class="block"><div class="time">11:30</div><div class="txt">
+          <b>🗼 Piazza dei Miracoli</b>
+          <div class="d">Schiefer Turm, Dom, Baptisterium, Camposanto · klassisches "Turm halten"-Foto · Aufstieg auf den Turm: <b>Tickets vorab</b> (25 €, ab 8 J), Slot ca. 30 Min</div></div></div>
+        <div class="block"><div class="time">13:30</div><div class="txt">
+          <b>🍝 Mittagessen in der Altstadt</b>
+          <div class="d">Trattoria in der Borgo Stretto oder am Arno</div></div></div>
+        <div class="block"><div class="time">15:00</div><div class="txt">
+          <b>Bummel Altstadt + Eis</b>
+          <div class="d">Piazza dei Cavalieri · Lungarni am Arno · Gelato bei De' Coltelli</div></div></div>
+        <div class="block"><div class="time">17:00</div><div class="txt">
+          <b>🚄 Rückfahrt nach Rom</b>
+          <div class="d">Zurück in Rom ca. 20:00 · im Apartment ankommen, leichtes Abendessen</div></div></div>
+      </div>
+    </details>
+
+    <details class="day">
+      <summary>
+        <div class="badge"><div class="n">5</div><div class="d">DO</div></div>
         <div class="info">
           <div class="date">28. Mai 2026</div>
-          <div class="title">Autofahrt &amp; Pompeji</div>
-          <div class="loc">🚗 Rom → Pompeji → Neapel</div>
+          <div class="title">Pompeji &amp; Vesuv</div>
+          <div class="loc">🏺 Ausgrabungen · 🌋 Krater</div>
         </div>
         <span class="arrow">›</span>
       </summary>
       <div class="content">
-        <div class="block"><div class="time">08:30</div><div class="txt">
-          <b>Früh raus, Leihwagen abholen</b>
-          <div class="d">Sunnycars am Termini · Sitzerhöhung prüfen (in Italien Pflicht bis 150 cm!) · Wasser für alle</div></div></div>
-        <div class="block"><div class="time">09:00</div><div class="txt">
-          <b>Fahrt A1/A2 → Pompeji</b>
-          <div class="d">ca. 240 km · 2h40 · 15 Min. Stopp beim Autogrill (Toilette, Kaffee, Panino)</div></div></div>
-        <div class="block"><div class="time">11:30</div><div class="txt">
+        <div class="block"><div class="time">⚠️</div><div class="txt">
+          <b>Langer Tag – früh los, später Rückkehr</b>
+          <div class="d">Mit 7-jährigem anstrengend, aber machbar. Feste Schuhe, Sonnenhut, viel Wasser. Pompeji-Tickets + Vesuv-Bus vorab buchen!</div></div></div>
+        <div class="block"><div class="time">06:30</div><div class="txt">
+          <b>Aufstehen, schneller Start</b>
+          <div class="d">Apartment → Termini · Frühstück im Zug</div></div></div>
+        <div class="block"><div class="time">07:20</div><div class="txt">
+          <b>🚄 Frecciarossa Rom → Napoli</b>
+          <div class="d">ca. 1h10 · ankommen Napoli Centrale ~08:30</div></div></div>
+        <div class="block"><div class="time">08:50</div><div class="txt">
+          <b>🚆 Circumvesuviana nach Pompeji</b>
+          <div class="d">Ab Napoli Garibaldi · ca. 35 Min · Station "Pompei Scavi - Villa dei Misteri"</div></div></div>
+        <div class="block"><div class="time">10:00</div><div class="txt">
           <b>🏺 Pompeji – kompakte Variante (3 h)</b>
-          <div class="d"><b>Bewusst nur Hauptachse:</b> Forum → Bäckerei → Amphitheater → Villa dei Misteri. Rest weglassen – Kinder sind nach 3h durch. Tickets 18 € · Kinder frei · Online + Zeitslot buchen.</div></div></div>
-        <div class="block"><div class="time">14:30</div><div class="txt">
+          <div class="d"><b>Bewusst nur Hauptachse:</b> Forum → Bäckerei → Amphitheater → Villa dei Misteri. Rest weglassen – Kinder sind nach 3 h durch. Tickets 18 € · Kinder frei · online mit Zeitslot.</div></div></div>
+        <div class="block"><div class="time">13:00</div><div class="txt">
           <b>Late Lunch am Ausgang</b>
-          <div class="d">Schnelles Panino oder Pasta in einer Trattoria direkt vor den Ausgrabungen</div></div></div>
-        <div class="block"><div class="time">15:30</div><div class="txt">
-          <b>Weiter nach Neapel (45 Min.)</b>
-          <div class="d">Nur 28 km · direkt zum Hotel mit Parkplatz (Hotel San Paolo) · ZTL Altstadt nicht selbst befahren!</div></div></div>
-        <div class="block"><div class="time">16:30</div><div class="txt">
-          <b>🏊 Hotel-Pool &amp; Ankommen</b>
-          <div class="d">Pool als Erholung nach langem Tag. Kinder toben, Eltern kippen um. Perfekter Ausklang.</div></div></div>
+          <div class="d">Schnelles Panino oder Pasta direkt vor den Ausgrabungen</div></div></div>
+        <div class="block"><div class="time">14:00</div><div class="txt">
+          <b>🚌 Shuttle-Bus zum Vesuv</b>
+          <div class="d">Vesuvio Express ab Pompei Scavi · ca. 30 Min hoch zum Parkplatz (1.000 m)</div></div></div>
+        <div class="block"><div class="time">15:00</div><div class="txt">
+          <b>🥾 Aufstieg zum Krater</b>
+          <div class="d">Eintritt Nationalpark 13 €/Erw · Kinder unter 8 frei · ca. 30 Min bergauf auf Schotter, dann am Kraterrand entlang · atemberaubender Blick auf den Golf von Neapel</div></div></div>
+        <div class="block"><div class="time">17:00</div><div class="txt">
+          <b>Abstieg + Rückfahrt nach Napoli</b>
+          <div class="d">Shuttle hinunter, Circumvesuviana nach Napoli Centrale</div></div></div>
         <div class="block"><div class="time">19:30</div><div class="txt">
-          <b>🍕 Original Pizza Napoletana</b>
-          <div class="d">Da Michele · Sorbillo · 50 Kalò. Reservierung empfohlen, sonst 1 h Wartezeit!</div></div></div>
+          <b>🚄 Frecciarossa zurück nach Rom</b>
+          <div class="d">ca. 1h10 · zurück in Rom ~20:45 · spätes Pizza-Dinner in der Nachbarschaft</div></div></div>
       </div>
     </details>
 
     <details class="day">
       <summary>
-        <div class="badge"><div class="n">5</div><div class="d">FR</div></div>
+        <div class="badge"><div class="n">6</div><div class="d">FR</div></div>
         <div class="info">
           <div class="date">29. Mai 2026</div>
-          <div class="title">Meer-Tag: Sorrent &amp; Positano</div>
-          <div class="loc">🌊 Amalfiküste</div>
+          <div class="title">Rom-Klassiker zu Fuß</div>
+          <div class="loc">🪙 Trevi · Pantheon · Spanische Treppe</div>
         </div>
         <span class="arrow">›</span>
       </summary>
       <div class="content">
-        <div class="block"><div class="time">09:00</div><div class="txt">
-          <b>Fahrt nach Sorrent</b>
-          <div class="d">50 km · 1h10 · Parken am Hafen</div></div></div>
-        <div class="block"><div class="time">10:30</div><div class="txt">
-          <b>🍋 Altstadt Sorrent</b>
-          <div class="d">Gassen, Zitronen-Spezialitäten, Limonata</div></div></div>
+        <div class="block"><div class="time">10:00</div><div class="txt">
+          <b>Ausschlafen nach gestern!</b>
+          <div class="d">Heute bewusst entspannt · kein Wecker, gemütliches Frühstück</div></div></div>
+        <div class="block"><div class="time">11:00</div><div class="txt">
+          <b>Piazza Navona &amp; Pantheon</b>
+          <div class="d">Brunnen, Straßenkünstler · Pantheon kostenfrei (oder 5 € seit 2023, Kinder frei)</div></div></div>
         <div class="block"><div class="time">12:30</div><div class="txt">
-          <b>Küstenstraße nach Positano</b>
-          <div class="d">Langsam fahren – atemberaubend!</div></div></div>
-        <div class="block"><div class="time">13:30</div><div class="txt">
-          <b>🏖️ Strandtag Spiaggia Grande</b>
-          <div class="d">Sandspiel · Bad im Meer · Liegen optional ~20 €</div></div></div>
-        <div class="block"><div class="time">17:30</div><div class="txt">
-          <b>Rückfahrt nach Neapel</b></div></div>
-        <div class="block"><div class="time">19:30</div><div class="txt">
-          <b>Dinner am Lungomare</b>
-          <div class="d">Spaghetti alle Vongole · Sonnenuntergang mit Vesuv-Blick</div></div></div>
+          <b>🍝 Mittagessen Campo de' Fiori</b>
+          <div class="d">Markt am Vormittag, Trattorien rundherum</div></div></div>
+        <div class="block"><div class="time">14:30</div><div class="txt">
+          <b>🌿 Pause / Eis</b>
+          <div class="d">🍦 Gelato bei Giolitti – wahrscheinlich das beste Eis Roms</div></div></div>
+        <div class="block"><div class="time">16:00</div><div class="txt">
+          <b>🪙 Trevi-Brunnen</b>
+          <div class="d">Münze mit <b>rechter Hand über linke Schulter</b> werfen – du kommst sicher wieder nach Rom!</div></div></div>
+        <div class="block"><div class="time">17:00</div><div class="txt">
+          <b>Spanische Treppe</b>
+          <div class="d">Bummel über die Via Condotti · Sonnenuntergangs-Foto-Moment ✨</div></div></div>
+        <div class="block"><div class="time">19:00</div><div class="txt">
+          <b>Letzter Abend in Rom</b>
+          <div class="d">Lieblingsrestaurant der Woche nochmal · oder Trastevere · Koffer packen vor dem Schlafengehen</div></div></div>
       </div>
     </details>
 
     <details class="day">
       <summary>
-        <div class="badge"><div class="n">6</div><div class="d">SA</div></div>
+        <div class="badge"><div class="n">7</div><div class="d">SA</div></div>
         <div class="info">
           <div class="date">30. Mai 2026</div>
-          <div class="title">Vesuv &amp; Entspannung</div>
-          <div class="loc">🌋 Vulkan-Ausflug + Pool-Nachmittag</div>
-        </div>
-        <span class="arrow">›</span>
-      </summary>
-      <div class="content">
-        <div class="block"><div class="time">08:30</div><div class="txt">
-          <b>Frühstück, früh los</b>
-          <div class="d">Wasserflasche, Sonnenhut, feste Schuhe – der Aufstieg ist sonnig</div></div></div>
-        <div class="block"><div class="time">09:00</div><div class="txt">
-          <b>Fahrt Neapel → Vesuv-Parkplatz</b>
-          <div class="d">ca. 30 km, 50 Min. · Parkplatz auf ~1.000 m Höhe (6 €/Tag)</div></div></div>
-        <div class="block"><div class="time">10:00</div><div class="txt">
-          <b>🥾 Aufstieg zum Krater</b>
-          <div class="d">Eintritt Vesuv-Nationalpark 13 €/Erw · Kinder unter 8 frei · ca. 30 Min. bergauf auf Schotterweg. Oben am Kraterrand entlang (1 km). Atemberaubender Blick auf Golf von Neapel!</div></div></div>
-        <div class="block"><div class="time">12:30</div><div class="txt">
-          <b>Abstieg &amp; Mittagessen</b>
-          <div class="d">Traditionelle <i>Trattoria</i> in Ercolano (Herculaneum) mit Vesuv-Blick</div></div></div>
-        <div class="block"><div class="time">14:30</div><div class="txt">
-          <b>🏺 Optional: Herculaneum (kurz)</b>
-          <div class="d">Kleiner, besser erhalten als Pompeji, 13 € · Kinder frei · nur 1,5 h · oder gleich weiter zum Hotel</div></div></div>
-        <div class="block"><div class="time">16:00</div><div class="txt">
-          <b>🏊 Hotel-Pool &amp; Erholung</b>
-          <div class="d">Das Hotel San Paolo hat einen Pool – nach dem Vulkan genau richtig</div></div></div>
-        <div class="block"><div class="time">19:30</div><div class="txt">
-          <b>Letzter Abend in Neapel</b>
-          <div class="d">Lieblings-Pizzeria nochmal · Sonnenuntergang am Lungomare mit Vesuv-Blick (den ihr heute bestiegen habt!)</div></div></div>
-      </div>
-    </details>
-
-    <details class="day">
-      <summary>
-        <div class="badge"><div class="n">7</div><div class="d">SO</div></div>
-        <div class="info">
-          <div class="date">31. Mai 2026</div>
           <div class="title">Rückreise</div>
-          <div class="loc">🚗 Neapel → ✈️ Heimflug</div>
+          <div class="loc">🏠 Check-out → ✈️ Heimflug</div>
         </div>
         <span class="arrow">›</span>
       </summary>
       <div class="content">
-        <div class="block"><div class="time">08:00</div><div class="txt">
-          <b>Frühstück &amp; Check-out</b></div></div>
         <div class="block"><div class="time">09:00</div><div class="txt">
-          <b>Fahrt Neapel → FCO</b>
-          <div class="d">220 km · 2h30 · min. 4h vor Abflug starten</div></div></div>
-        <div class="block"><div class="time">11:30</div><div class="txt">
-          <b>Leihwagen zurückgeben</b>
-          <div class="d">Schalter direkt am Flughafen Fiumicino</div></div></div>
-        <div class="block"><div class="time">14:00+</div><div class="txt">
-          <b>Rückflug nach Deutschland</b>
-          <div class="d">Ciao Italia! 🇮🇹</div></div></div>
+          <b>Frühstück &amp; letzte Koffer-Checks</b></div></div>
+        <div class="block"><div class="time">10:30</div><div class="txt">
+          <b>🏠 Check-out aus dem Apartment</b>
+          <div class="d">Schlüssel zurück, Müll raus · Gepäck bei Bedarf bei Bagbnb / Stasher zwischenlagern</div></div></div>
+        <div class="block"><div class="time">11:00</div><div class="txt">
+          <b>Letzter Spaziergang / Eis</b>
+          <div class="d">Optional: nochmal ums Eck, letztes Gelato</div></div></div>
+        <div class="block"><div class="time">13:00</div><div class="txt">
+          <b>🚆 Leonardo-Express zum FCO</b>
+          <div class="d">Termini → Fiumicino · 32 Min · 14 €/Erw</div></div></div>
+        <div class="block"><div class="time">14:00</div><div class="txt">
+          <b>Am Flughafen</b>
+          <div class="d">2,5 h vor Abflug · Check-in, Sicherheit, was Kleines essen</div></div></div>
+        <div class="block"><div class="time">16:40</div><div class="txt">
+          <b>✈️ Rückflug Condor DE4186</b>
+          <div class="d">FCO → FRA · Ankunft 18:30 · Ciao Italia! 🇮🇹</div></div></div>
       </div>
     </details>
 
@@ -523,91 +555,46 @@
 
 <!-- HOTELS -->
 <section>
-  <h2><span class="ico">🏨</span> Unterkünfte</h2>
+  <h2><span class="ico">🏠</span> Unterkunft</h2>
   <div class="cards">
     <div class="card">
-      <div class="kicker">Rom · 3 Nächte</div>
-      <h3>Hotel Marcantonio</h3>
-      <div class="addr">Via Cavour · 400 m Kolosseum</div>
-      <div class="price">ca. 150 €/Nacht · Vierbett</div>
+      <div class="kicker">Rom · 6 Nächte</div>
+      <h3>Suite-Apartment</h3>
+      <div class="addr">Via Vittorino da Feltre 81 · nahe San Giovanni</div>
+      <div class="price">Check-in So 24.05. · Check-out Sa 30.05.</div>
       <div class="tags">
-        <span class="tag ok">Familien-Zimmer</span>
-        <span class="tag">Frühstück inkl.</span>
-        <span class="tag">Termini 5 Min</span>
-      </div>
-    </div>
-    <div class="card">
-      <div class="kicker">Neapel · 3 Nächte</div>
-      <h3>Hotel San Paolo</h3>
-      <div class="addr">mit Privatparkplatz &amp; Pool</div>
-      <div class="price">ca. 120 €/Nacht · 4★</div>
-      <div class="tags">
-        <span class="tag ok">Pool!</span>
-        <span class="tag">Eigener Parkplatz</span>
-        <span class="tag warn">Taxi in Altstadt</span>
+        <span class="tag ok">Apartment für Familie</span>
+        <span class="tag">1 Erw. + 2 Kinder (7 &amp; 11)</span>
+        <span class="tag">Metro &amp; Tram um die Ecke</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FLUG & AUTO -->
+<!-- FLÜGE -->
 <section>
-  <h2><span class="ico">✈️</span> Transport</h2>
+  <h2><span class="ico">✈️</span> Flüge</h2>
   <div class="cards">
     <div class="card">
-      <div class="kicker">Empfohlener Flug</div>
-      <h3>Eurowings STR ↔ FCO</h3>
-      <div class="addr">Stuttgart → Rom Fiumicino · 1h45</div>
-      <div class="price">ca. 110 €/Person · ~330 € Familie</div>
+      <div class="kicker">Hinflug · So 24.05.</div>
+      <h3>Condor DE4419</h3>
+      <div class="addr">Frankfurt 14:00 → Rom Fiumicino 15:50</div>
+      <div class="price">Economy Class · 1h50 Flugzeit</div>
       <div class="tags">
-        <span class="tag">Handgepäck inkl.</span>
         <span class="tag ok">FCO zentrumsnah</span>
+        <span class="tag">Leonardo-Express ins Zentrum</span>
       </div>
     </div>
     <div class="card">
-      <div class="kicker">Spar-Alternative</div>
-      <h3>Ryanair FRA ↔ CIA</h3>
-      <div class="addr">Frankfurt → Rom Ciampino</div>
-      <div class="price">ca. 89 €/Person · ~270 € Familie</div>
+      <div class="kicker">Rückflug · Sa 30.05.</div>
+      <h3>Condor DE4186</h3>
+      <div class="addr">Rom Fiumicino 16:40 → Frankfurt 18:30</div>
+      <div class="price">Economy Class · 1h50 Flugzeit</div>
       <div class="tags">
-        <span class="tag warn">Nur Handgepäck</span>
-        <span class="tag">Bus zum Zentrum</span>
+        <span class="tag">2,5 h vor Abflug am Flughafen</span>
+        <span class="tag ok">Apartment-Check-out bis ca. 11:00</span>
       </div>
     </div>
-    <div class="card">
-      <div class="kicker">Leihwagen 4 Tage</div>
-      <h3>Sunnycars Kompaktklasse</h3>
-      <div class="addr">Abholung Termini · Rückgabe FCO</div>
-      <div class="price">ca. 165 € · inkl. Vollkasko</div>
-      <div class="tags">
-        <span class="tag ok">Voll versichert</span>
-        <span class="tag">Kindersitz ~5 €/Tag</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- BUDGET -->
-<section>
-  <h2><span class="ico">💰</span> Budget-Übersicht</h2>
-  <div class="card">
-    <div class="budget-row"><span class="lbl">Flüge</span>
-      <span class="bar"><span style="width:18%"></span></span><span class="amt">330 €</span></div>
-    <div class="budget-row"><span class="lbl">Hotel Rom (3 N)</span>
-      <span class="bar"><span style="width:24%"></span></span><span class="amt">450 €</span></div>
-    <div class="budget-row"><span class="lbl">Hotel Neapel (3 N)</span>
-      <span class="bar"><span style="width:19%"></span></span><span class="amt">360 €</span></div>
-    <div class="budget-row"><span class="lbl">Leihwagen (4 Tage)</span>
-      <span class="bar"><span style="width:9%"></span></span><span class="amt">165 €</span></div>
-    <div class="budget-row"><span class="lbl">Tank + Maut + Vesuv-Parkplatz</span>
-      <span class="bar"><span style="width:7%"></span></span><span class="amt">130 €</span></div>
-    <div class="budget-row"><span class="lbl">Eintritte inkl. Vesuv</span>
-      <span class="bar"><span style="width:6%"></span></span><span class="amt">110 €</span></div>
-    <div class="budget-row"><span class="lbl">Verpflegung (7 Tage)</span>
-      <span class="bar"><span style="width:14%"></span></span><span class="amt">260 €</span></div>
-    <div class="budget-row"><span class="lbl">Extras (Eis, Taxi, Souvenirs)</span>
-      <span class="bar"><span style="width:6%"></span></span><span class="amt">120 €</span></div>
-    <div class="total"><span>Gesamt Familie</span><span class="v">≈ 1.925 €</span></div>
   </div>
 </section>
 
@@ -637,13 +624,14 @@
   <div class="tips">
     <ul>
       <li>🧘 <b>Eine große Sehenswürdigkeit pro Tag</b> – nicht mehr!</li>
-      <li>🌞 Kultur am <b>Vormittag</b>, danach Siesta oder Pool.</li>
+      <li>🌞 Kultur am <b>Vormittag</b>, mittags Siesta im Apartment.</li>
       <li>🍦 <b>Eis-Stopps sind keine Zeitverschwendung</b> – sie sind Reiseerinnerung.</li>
-      <li>📱 Tickets für Kolosseum, Vatikan &amp; Pompeji <b>online vorbuchen</b> (mit Zeitslot!).</li>
+      <li>📱 Tickets <b>online vorbuchen</b> mit Zeitslot: Kolosseum, Vatikan, Pompeji, Schiefer Turm.</li>
+      <li>🚄 Frecciarossa-Tickets nach Pisa und Neapel <b>früh</b> buchen – Preis steigt mit der Auslastung.</li>
       <li>💧 Wasserflaschen mitnehmen – Rom hat über 2.500 Trinkbrunnen (<i>Nasoni</i>).</li>
-      <li>🚗 In Neapel <b>nie</b> selbst in die Altstadt fahren (ZTL-Zone!).</li>
       <li>👕 Vatikan: Schultern &amp; Knie bedeckt – auch Kinder!</li>
-      <li>🪑 In Italien Kindersitz-/Sitzerhöhungs-Pflicht bis 150 cm / 12 J.</li>
+      <li>🥾 Pompeji + Vesuv: feste Schuhe, Sonnenhut, viel Wasser – ist sportlich für die Kleinen.</li>
+      <li>📅 Mo 25.05. ist <b>Pfingstmontag</b> – in Italien kein Feiertag, aber Vatikan trotzdem voll → Vatikan am Dienstag.</li>
       <li>💶 Viele kleine Lokale nur Bargeld – immer 50–100 € dabei haben.</li>
       <li>🆘 Notruf: <b>112</b> (allgemein) · <b>118</b> (Krankenwagen)</li>
     </ul>
@@ -670,7 +658,7 @@
 <!-- Countdown -->
 <script>
 (function(){
-  var target = new Date('2026-05-25T08:00:00+02:00').getTime();
+  var target = new Date('2026-05-24T14:00:00+02:00').getTime();
   function pad(n){ return n < 10 ? '0' + n : '' + n; }
   function tick(){
     var now = Date.now();
@@ -722,7 +710,7 @@
                    '<div class="wx-loading">Wetter wird geladen …</div>';
     var url = 'https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+lon+
               '&daily=weather_code,temperature_2m_max,temperature_2m_min'+
-              '&timezone=Europe%2FBerlin&start_date=2026-05-25&end_date=2026-05-31';
+              '&timezone=Europe%2FBerlin&start_date=2026-05-24&end_date=2026-05-30';
     fetch(url).then(function(r){ return r.json(); }).then(function(data){
       if(!data.daily || !data.daily.time){
         el.querySelector('.wx-loading').textContent =
@@ -730,7 +718,7 @@
         return;
       }
       var html = '<div class="wx-head"><h3>'+city+'</h3>'+
-                 '<span class="status">25.–31.5.2026</span></div>'+
+                 '<span class="status">24.–30.5.2026</span></div>'+
                  '<div class="wx-days">';
       data.daily.time.forEach(function(t,i){
         var d = new Date(t);
@@ -761,23 +749,22 @@
     { icon:'📄', title:'Reise-Dokumente', items:[
       'Personalausweis/Reisepass – alle 3 Personen',
       'Europäische Krankenversicherungskarte (EGK)',
-      'Leihwagen-Buchungsbestätigung + Kreditkarte',
-      'Flug-Buchung / Online Check-in',
-      'Hotel-Buchungen Rom + Neapel ausgedruckt',
-      'Tickets Kolosseum + Vatikan + Pompeji (mit Zeitslot!)',
+      'Condor Hin- + Rückflug · Online Check-in 24 h vorher',
+      'Apartment-Buchung Rom (Adresse, Code, Kontakt Vermieter)',
+      'Frecciarossa-Tickets: Rom ↔ Pisa, Rom ↔ Napoli (Circumvesuviana)',
+      'Tickets mit Zeitslot: Kolosseum + Vatikan + Pompeji + Schiefer Turm',
       'Reiseversicherung (Stornoschutz + Gesundheit)'
     ]},
     { icon:'🎒', title:'Für die Kinder', items:[
       'Kinderreisepass gültig prüfen',
       'Kleiner Rucksack pro Kind',
       'Kuscheltier + Einschlafhilfe',
-      'Kinder-Reisekissen fürs Auto',
+      'Kinder-Reisekissen für die Zugfahrten',
       'Buntstifte + Malbuch für Wartezeiten',
-      'Snacks für den Flug / Auto',
+      'Snacks für Flug + Tagesausflüge (Pisa, Pompeji)',
       'Sonnencreme LF 50+ in Kinderformel',
-      'Sonnenhut + UV-Shirt fürs Meer',
-      'Badesachen + Schwimmhilfen',
-      'Geschlossene Schuhe (Pompeji-Boden!)'
+      'Sonnenhut + UV-Schutz',
+      'Geschlossene Schuhe (Pompeji-Boden + Vesuv-Schotter!)'
     ]},
     { icon:'👕', title:'Kleidung – wichtig', items:[
       'Tuch / Schal für Vatikan (Schultern bedecken!)',
@@ -814,8 +801,7 @@
     { icon:'📞', title:'Notfall-Kontakte notieren', items:[
       '112 – allgemeiner Notruf (auch ohne SIM)',
       '118 – Krankenwagen Italien',
-      'Hotel Rom Marcantonio: Via Cavour 36, +39 06 4788 2330',
-      'Hotel Neapel San Paolo: siehe Buchung',
+      'Apartment Rom: Via Vittorino da Feltre 81 (Vermieter-Nr. aus Buchung)',
       'Botschaft Deutschland Rom: +39 06 492131',
       'Deutsche Auslandshotline Krankenversicherung'
     ]}
@@ -878,16 +864,15 @@
   var btn = document.getElementById('btnIcs');
   if(!btn) return;
   var events = [
-    { d:'20260525T060000', dEnd:'20260525T100000', title:'Flug nach Rom (FCO)',          loc:'Flughafen Deutschland' },
-    { d:'20260526T090000', dEnd:'20260526T123000', title:'Kolosseum + Forum + Palatin',  loc:'Piazza del Colosseo, Rom' },
-    { d:'20260527T090000', dEnd:'20260527T113000', title:'Vatikanische Museen',          loc:'Viale Vaticano, Rom' },
-    { d:'20260527T183000', dEnd:'20260527T194500', title:'Spanische Treppe & Trevi',     loc:'Rom Zentrum' },
-    { d:'20260528T083000', dEnd:'20260528T113000', title:'Fahrt Rom → Pompeji',          loc:'A1/A2 Autobahn' },
-    { d:'20260528T113000', dEnd:'20260528T143000', title:'Pompeji Ausgrabungen',         loc:'Pompeji Scavi' },
-    { d:'20260529T090000', dEnd:'20260529T170000', title:'Amalfiküste: Sorrent + Positano', loc:'Amalfi-Küste' },
-    { d:'20260530T090000', dEnd:'20260530T130000', title:'Vesuv-Aufstieg',               loc:'Monte Vesuvio' },
-    { d:'20260531T090000', dEnd:'20260531T120000', title:'Rückfahrt Neapel → FCO',       loc:'Rom Fiumicino' },
-    { d:'20260531T143000', dEnd:'20260531T170000', title:'Rückflug nach Deutschland',    loc:'FCO → DE' }
+    { d:'20260524T140000', dEnd:'20260524T155000', title:'Hinflug Condor DE4419 (FRA → FCO)', loc:'Frankfurt → Rom Fiumicino' },
+    { d:'20260524T170000', dEnd:'20260524T180000', title:'Apartment Check-in',                loc:'Via Vittorino da Feltre 81, Rom' },
+    { d:'20260525T090000', dEnd:'20260525T123000', title:'Kolosseum + Forum + Palatin',       loc:'Piazza del Colosseo, Rom' },
+    { d:'20260526T090000', dEnd:'20260526T123000', title:'Vatikanische Museen + Petersdom',   loc:'Viale Vaticano, Rom' },
+    { d:'20260527T073500', dEnd:'20260527T200000', title:'Tagesausflug Pisa',                 loc:'Frecciarossa Rom Termini ↔ Pisa Centrale' },
+    { d:'20260528T072000', dEnd:'20260528T210000', title:'Pompeji + Vesuv (Tagesausflug)',    loc:'Pompeji Scavi · Monte Vesuvio' },
+    { d:'20260529T110000', dEnd:'20260529T190000', title:'Rom-Sights: Pantheon · Trevi · Spanische Treppe', loc:'Rom Zentrum' },
+    { d:'20260530T103000', dEnd:'20260530T130000', title:'Apartment Check-out',               loc:'Via Vittorino da Feltre 81, Rom' },
+    { d:'20260530T164000', dEnd:'20260530T183000', title:'Rückflug Condor DE4186 (FCO → FRA)', loc:'Rom Fiumicino → Frankfurt' }
   ];
 
   function ics(){
@@ -941,10 +926,13 @@
         '<span style="color:#65768A;font-size:.9rem">' +
         'Bitte mit Internetverbindung öffnen, um die interaktive Karte zu sehen.<br><br>' +
         '<b>Route:</b><br>' +
-        '✈️ Deutschland → 🏛️ Rom (Tag 1–3)<br>' +
-        '🚗 Rom → 🏺 Pompeji → 🌋 Neapel (Tag 4)<br>' +
-        '🚗 Neapel → 🍋 Sorrent → 🌊 Positano (Tag 5)<br>' +
-        '🚗 Neapel → ✈️ Rom FCO → Heimat (Tag 6)</span>';
+        '✈️ Frankfurt → 🏠 Rom Apartment (Tag 1)<br>' +
+        '🏛️ Kolosseum + Forum (Tag 2)<br>' +
+        '⛪ Vatikan (Tag 3)<br>' +
+        '🗼 Tagesausflug Pisa (Tag 4)<br>' +
+        '🏺 Pompeji + 🌋 Vesuv (Tag 5)<br>' +
+        '🪙 Rom-Sights: Trevi, Pantheon (Tag 6)<br>' +
+        '✈️ Rückflug Rom → Frankfurt (Tag 7)</span>';
     }
     return;
   }
@@ -987,41 +975,33 @@
   window.addEventListener('resize', refresh);
   window.addEventListener('orientationchange', function(){ setTimeout(refresh, 300); });
 
-  // ------ Etappen mit echter Reise-Reihenfolge ------
-  // Stationen in der Reihenfolge der Reise:
-  //  1 Rom FCO (Ankunft)         Tag 1 – blau
-  //  2 Rom Zentrum (Hotel)       Tag 1–3 – blau (Hauptpunkt)
-  //  3 Kolosseum / Forum         Tag 2 – blau
-  //  4 Vatikan                   Tag 3 – blau
-  //  5 Pompeji                   Tag 4 – rot
-  //  6 Neapel (Hotel)            Tag 4–5 – rot (Hauptpunkt)
-  //  7 Sorrent                   Tag 5 – orange
-  //  8 Positano                  Tag 5 – orange
-  //  9 Rom FCO (Rückflug)        Tag 6 – grün
+  // ------ Etappen in der Reihenfolge der Reise ------
+  //  1 Rom FCO (Ankunft)            Tag 1 – blau
+  //  2 Apartment Rom (Basis)        Tag 1–7 – blau (Hauptpunkt)
+  //  3 Kolosseum / Forum            Tag 2 – blau
+  //  4 Vatikan                      Tag 3 – blau
+  //  5 Pisa                         Tag 4 – orange (Tagesausflug)
+  //  6 Pompeji                      Tag 5 – lila (Tagesausflug)
+  //  7 Vesuv                        Tag 5 – lila (Tagesausflug)
+  //  8 Rom FCO (Rückflug)           Tag 7 – grün
 
   var stages = [
     { n:1, ll:[41.8003,12.2389], c:'#0E6FB8', ico:'✈️', t:'Rom Fiumicino (FCO)',
-      sub:'Tag 1 · Ankunft mit Flugzeug' },
-    { n:2, ll:[41.9000,12.4950], c:'#0E6FB8', ico:'🏨', t:'Rom Zentrum · Hotel Marcantonio',
-      sub:'Tag 1–3 · 3 Übernachtungen', big:true },
+      sub:'Tag 1 · Ankunft Condor DE4419, 15:50' },
+    { n:2, ll:[41.8896,12.5141], c:'#0E6FB8', ico:'🏠', t:'Apartment · Via Vittorino da Feltre 81',
+      sub:'Tag 1–7 · Basis für die ganze Woche', big:true },
     { n:3, ll:[41.8902,12.4922], c:'#0E6FB8', ico:'🏛️', t:'Kolosseum & Forum Romanum',
-      sub:'Tag 2 · Antikes Rom' },
+      sub:'Tag 2 · Antikes Rom (Pfingstmontag)' },
     { n:4, ll:[41.9029,12.4534], c:'#0E6FB8', ico:'⛪', t:'Vatikan · Petersdom',
       sub:'Tag 3 · Vatikanische Museen' },
-    { n:5, ll:[40.7488,14.4855], c:'#D72638', ico:'🏺', t:'Pompeji',
-      sub:'Tag 4 · Ausgrabungsstätte (Stopp unterwegs)' },
-    { n:6, ll:[40.8518,14.2681], c:'#D72638', ico:'🌋', t:'Neapel · Hotel San Paolo',
-      sub:'Tag 4–5 · 2 Übernachtungen', big:true },
-    { n:7, ll:[40.6263,14.3757], c:'#F4A261', ico:'🍋', t:'Sorrent',
-      sub:'Tag 5 · Altstadt & Zitronen' },
-    { n:8, ll:[40.6280,14.4847], c:'#F4A261', ico:'🏖️', t:'Positano (Amalfiküste)',
-      sub:'Tag 5 · Strand & Meer' },
-    { n:9, ll:[40.8220,14.4280], c:'#9B5DE5', ico:'🌋', t:'Vesuv',
-      sub:'Tag 6 · Kraterwanderung, 1.281 m' },
-    { n:10, ll:[40.8058,14.3487], c:'#9B5DE5', ico:'🏺', t:'Herculaneum (optional)',
-      sub:'Tag 6 · Mittagspause am Fuße des Vesuv' },
-    { n:11, ll:[41.8003,12.2389], c:'#2A9D8F', ico:'✈️', t:'Rom Fiumicino (FCO)',
-      sub:'Tag 7 · Rückflug nach Hause' }
+    { n:5, ll:[43.7229,10.3966], c:'#F4A261', ico:'🗼', t:'Pisa · Piazza dei Miracoli',
+      sub:'Tag 4 · Tagesausflug per Frecciarossa' },
+    { n:6, ll:[40.7488,14.4855], c:'#9B5DE5', ico:'🏺', t:'Pompeji',
+      sub:'Tag 5 · Ausgrabungsstätte (vormittags)' },
+    { n:7, ll:[40.8220,14.4280], c:'#9B5DE5', ico:'🌋', t:'Vesuv',
+      sub:'Tag 5 · Kraterwanderung (nachmittags)' },
+    { n:8, ll:[41.8003,12.2389], c:'#2A9D8F', ico:'✈️', t:'Rom Fiumicino (FCO)',
+      sub:'Tag 7 · Rückflug Condor DE4186, 16:40' }
   ];
 
   // Marker zeichnen (große Haltepunkte für Übernachtungsorte)
@@ -1083,52 +1063,52 @@
     return fallback;
   }
 
-  // Tag 1: FCO → Rom Zentrum (Zug – keine OSRM-Route, Luftlinie gestrichelt)
+  // Tag 1: FCO → Apartment (Leonardo-Express / Taxi, dashed)
   route([stages[0].ll, stages[1].ll], '#0E6FB8',
         { dash:'6,6', profile:false,
-          label:'🚆 Tag 1: FCO → Rom Termini (Leonardo-Express, 32 Min)' });
+          label:'🚆 Tag 1: FCO → Termini → Apartment (Leonardo-Express, 32 Min)' });
 
-  // Tag 2: Hotel → Kolosseum (Fußweg, echt)
+  // Tag 2: Apartment → Kolosseum (Fußweg / Metro)
   route([stages[1].ll, stages[2].ll], '#0E6FB8',
         { dash:'2,6', profile:'foot',
-          label:'🚶 Tag 2: Hotel → Kolosseum (10 Min zu Fuß)' });
+          label:'🚶 Tag 2: Apartment → Kolosseum (Fußweg / Metro)' });
 
-  // Tag 3: Hotel → Vatikan → Spanische Treppe → Trevi → Hotel (Fußweg + Taxi)
+  // Tag 3: Apartment → Vatikan (Metro Linie A)
   route([stages[1].ll, stages[3].ll], '#0E6FB8',
         { dash:'2,6', profile:'foot',
-          label:'🚶 Tag 3: Hotel → Vatikan' });
+          label:'🚇 Tag 3: Apartment → Vatikan (Metro Linie A)' });
 
-  // Tag 4: Rom Zentrum → Pompeji → Neapel (echte Auto-Route über A1/A2)
-  route([stages[1].ll, stages[4].ll, stages[5].ll], '#D72638',
-        { label:'🚗 Tag 4: Rom → Pompeji → Neapel (ca. 270 km, ~3h40)' });
+  // Tag 4: Rom → Pisa (Frecciarossa, gestrichelte Luftlinie)
+  route([stages[1].ll, stages[4].ll], '#F4A261',
+        { dash:'6,6', profile:false,
+          label:'🚄 Tag 4: Rom Termini → Pisa Centrale (Frecciarossa, ca. 3h)' });
 
-  // Tag 5: Neapel → Sorrent → Positano → zurück
-  route([stages[5].ll, stages[6].ll, stages[7].ll, stages[5].ll], '#F4A261',
-        { label:'🚗 Tag 5: Neapel → Sorrent → Positano → Neapel (ca. 110 km)' });
+  // Tag 5: Rom → Pompeji → Vesuv (Frecciarossa + Circumvesuviana + Bus)
+  route([stages[1].ll, stages[5].ll, stages[6].ll], '#9B5DE5',
+        { dash:'6,6', profile:false,
+          label:'🚄 Tag 5: Rom → Napoli → Pompeji → Vesuv (Bahn + Bus)' });
 
-  // Tag 6: Neapel → Vesuv → Herculaneum → zurück
-  route([stages[5].ll, stages[8].ll, stages[9].ll, stages[5].ll], '#9B5DE5',
-        { label:'🌋 Tag 6: Neapel → Vesuv → Herculaneum → Neapel (ca. 60 km)' });
-
-  // Tag 7: Neapel → Rom FCO (Rückfahrt)
-  route([stages[5].ll, stages[10].ll], '#2A9D8F',
-        { label:'🚗 Tag 7: Neapel → Rom FCO (ca. 220 km, ~2h30)' });
+  // Tag 7: Apartment → FCO (Leonardo-Express, gestrichelt)
+  route([stages[1].ll, stages[7].ll], '#2A9D8F',
+        { dash:'6,6', profile:false,
+          label:'🚆 Tag 7: Apartment → Termini → FCO (Leonardo-Express)' });
 
   // Karte genau auf alle Stationen zentrieren
   var allBounds = L.latLngBounds(stages.map(function(s){ return s.ll; }));
   map.fitBounds(allBounds.pad(0.15));
 
   // ------ Legende klickbar ------
-  // Welche stages[-index] gehören zu welchem Tag:
-  //   1 = FCO-Ankunft, 2 = Rom-Hotel, 3 = Kolosseum, 4 = Vatikan,
-  //   5 = Pompeji,     6 = Neapel-Hotel, 7 = Sorrent, 8 = Positano,
-  //   9 = Vesuv,      10 = Herculaneum,  11 = FCO-Rückflug
+  // Welche stages[n] gehören zu welchem Tag:
+  //   1 = FCO-Ankunft, 2 = Apartment Rom, 3 = Kolosseum, 4 = Vatikan,
+  //   5 = Pisa, 6 = Pompeji, 7 = Vesuv, 8 = FCO-Rückflug
   var dayGroups = {
-    '1': { stages:[1,2,3,4], highlight:2, title:'Rom (Tag 1–3)' },
-    '4': { stages:[2,5,6],   highlight:5, title:'Rom → Pompeji → Neapel' },
-    '5': { stages:[6,7,8],   highlight:8, title:'Neapel → Sorrent → Positano' },
-    '6': { stages:[6,9,10],  highlight:9, title:'Vesuv & Herculaneum' },
-    '7': { stages:[6,11],    highlight:11, title:'Neapel → Rom FCO' }
+    '1': { stages:[1,2],   highlight:2, title:'Ankunft Rom' },
+    '2': { stages:[2,3],   highlight:3, title:'Kolosseum & Forum' },
+    '3': { stages:[2,4],   highlight:4, title:'Vatikan' },
+    '4': { stages:[2,5],   highlight:5, title:'Tagesausflug Pisa' },
+    '5': { stages:[2,6,7], highlight:6, title:'Pompeji & Vesuv' },
+    '6': { stages:[2],     highlight:2, title:'Rom-Sights zu Fuß' },
+    '7': { stages:[2,8],   highlight:8, title:'Rückflug nach Frankfurt' }
   };
 
   function stageByN(n){
